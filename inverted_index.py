@@ -1,5 +1,3 @@
-from dataclasses import dataclass
-
 class InvertedIndex:
     """ Track the Inverted Index and the ID-Posting dictionaries. Should abstract away any adding to these dictionaries."""
 
