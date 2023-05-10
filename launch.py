@@ -1,8 +1,19 @@
 import json
+import re
+from bs4 import BeautifulSoup
+
 
 def load_json(given_file):
     open_file = open(given_file, errors='ignore')
-    data = json.load(open_file)
+    try:
+        data = json.load(open_file)
+        
+        soup = BeautifulSoup(data['content'], 'html.parser')
+        text = soup.get_text(strip=True)
+        textWithoutSymbols = re.sub(r"[^A-Za-z0-9\s]+", "", text)
+        print(textWithoutSymbols)
+    except:
+        pass
     open_file.close()
 
 def run():
