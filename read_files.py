@@ -15,5 +15,8 @@ def read_files(filename) -> None:
             # some pipeline function to process the file
             store = file_processor(full_relative)
             print(store)
-            print()
-            print()
+
+
+if __name__ == "__main__":
+    given_file = "C:\\Store"
+    read_files(given_file)
