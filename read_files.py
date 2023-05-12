@@ -15,11 +15,11 @@ def read_files(filename) -> None:
         else: # if not a folder, must be a file
             # some pipeline function to process the file
             tokenList = file_processor(full_relative)
-            inverted_index.appendInverted(tokenList)
+            start = inverted_index.InvertedIndex()
+            start.appendInverted(tokenList)
             
             
 
 
 if __name__ == "__main__":
-    file = "C://Store"
-    read_files(file)
+    pass

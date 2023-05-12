@@ -19,7 +19,7 @@ class InvertedIndex:
         for token in tokenLst:
             # Check if token in dictionary. If not, create new key = token and value = [[frequency = 1],[docID = 1]]
             if token not in cls.InvertedIndexDict:
-                cls.InvertedIndexDict[token] = [[1][cls.docID]]
+                cls.InvertedIndexDict[token] = [1,[cls.docID]]
             else:
                 # If the token already is in dictioary, check if the current docID is in the docID list.
                 # By doing so, we avoid duplicates if the same token is in the same document.
@@ -28,7 +28,7 @@ class InvertedIndex:
                 else:
                     # Increament the frequency, and append the new docId in the docID list.
                     cls.InvertedIndexDict[token][0] += 1
-                    cls.InvertedIndexDict[token][1] += cls.docID
+                    cls.InvertedIndexDict[token][1].append(cls.docID)
         # Increment the overall docID
         cls.docID += 1
         
