@@ -1,5 +1,6 @@
 import os
 from process import file_processor
+import inverted_index 
 
 def read_files(filename) -> None:
     if not os.path.exists(filename):
@@ -13,7 +14,10 @@ def read_files(filename) -> None:
             read_files(full_relative)
         else: # if not a folder, must be a file
             # some pipeline function to process the file
-            file_processor(full_relative)
+            tokenList = file_processor(full_relative)
+            inverted_index.appendInverted(tokenList)
+            
+            
 
 
 if __name__ == "__main__":
