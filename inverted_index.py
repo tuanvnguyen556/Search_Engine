@@ -1,4 +1,4 @@
-class InvertedIndex2:
+class InvertedIndex:
     """
     Creates the inverted index for every token in every document.
     Creates a dictionary/map of the token to a list
@@ -6,7 +6,7 @@ class InvertedIndex2:
     index is the list of documentIDs.
     """
     # Of the format: {"token": [[frequency],[docID1, docID2, ....]]}
-    InvertedIndex2 = dict()
+    InvertedIndexDict = dict()
     # Start at docID = 1
     docID = 1
     
