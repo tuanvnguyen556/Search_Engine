@@ -6,13 +6,12 @@ from nltk.tokenize import word_tokenize
 from inverted_index import InvertedIndex # these are for creating a posting and adding it to 
 from postings import Posting, docID_counter # Creates a Posting object
 
-
+import nltk 
 def file_processor(given_file):
     """
     This function processes the json file and retrieves the html content.
     Then, the html content is processed.
     """
-
     tokens = []
     
     open_file = open(given_file, errors='ignore') #opens the file
@@ -25,12 +24,12 @@ def file_processor(given_file):
         textWithoutSymbols = re.sub(r"[^A-Za-z0-9\s]+", "", text) #does some stripping of characters
         tokens = word_tokenize(textWithoutSymbols)
         InvertedIndex.addPosting(docID=docID_counter.docID, posting=Posting(url=data['url'], encoding=data['encoding'], content=text))
+        tokens = word_tokenize(textWithoutSymbols.lower()) #tokenizes the string and lowercases them
     except Exception as e:
-        print(e) # skip any errors, but notify the user as well
+        print(e)
     open_file.close()
     return tokens
 
 
 if __name__ == "__main__":
-    given_file = r"developer/DEV/aiclub_ics_uci_edu/8ef6d99d9f9264fc84514cdd2e680d35843785310331e1db4bbd06dd2b8eda9b.json"
-    file_processor(given_file)
+    pass

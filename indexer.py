@@ -1,9 +1,6 @@
 from bs4 import BeautifulSoup
 from inverted_index import InvertedIndex
 
-
-
-
 def index():
     pass
     # for each term... 
