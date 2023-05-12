@@ -23,3 +23,4 @@ class InvertedIndex:
             raise KeyError(f"{docID} already exists as a key.")
         
         cls.ID_Posting[docID] = posting # set posting equal to DOC_ID
+    
