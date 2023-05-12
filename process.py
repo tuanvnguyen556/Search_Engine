@@ -3,8 +3,9 @@ import re
 from bs4 import BeautifulSoup
 from nltk.tokenize import word_tokenize
 
-from inverted_index import InvertedIndex # these are for creating a posting and adding it to 
+from posting_dictionary import Posting_Dict # these are for creating a posting and adding it to 
 from postings import Posting, docID_counter # Creates a Posting object
+from inverted_index2 import InvertedIndex2
 
 import nltk 
 def file_processor(given_file):
@@ -23,7 +24,7 @@ def file_processor(given_file):
         text = soup.get_text(strip=True) #retrieves the content
         textWithoutSymbols = re.sub(r"[^A-Za-z0-9\s]+", "", text) #does some stripping of characters
         tokens = word_tokenize(textWithoutSymbols)
-        InvertedIndex.addPosting(docID=docID_counter.docID, posting=Posting(url=data['url'], encoding=data['encoding'], content=text))
+        Posting_Dict.addPosting(docID=InvertedIndex2.docID, posting=Posting(url=data['url'], encoding=data['encoding'], content=text))
         tokens = word_tokenize(textWithoutSymbols.lower()) #tokenizes the string and lowercases them
     except Exception as e:
         print(e)
