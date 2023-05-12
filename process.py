@@ -14,12 +14,12 @@ def file_processor(given_file):
         soup = BeautifulSoup(data['content'], 'html.parser') #parses html
         text = soup.get_text(strip=True) #retrieves the content
         textWithoutSymbols = re.sub(r"[^A-Za-z0-9\s]+", "", text) #does some stripping of characters
-        print(textWithoutSymbols)
+
+        return textWithoutSymbols
     except:
         pass
     open_file.close()
 
 
 if __name__ == "__main__":
-    given_file = "C:\\8ef6d99d9f9264fc84514cdd2e680d35843785310331e1db4bbd06dd2b8eda9b.json"
-    file_processor(given_file)
+    pass

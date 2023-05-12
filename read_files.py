@@ -1,4 +1,5 @@
 import os
+from process import file_processor
 
 def read_files(filename) -> None:
     if not os.path.exists(filename):
@@ -12,5 +13,7 @@ def read_files(filename) -> None:
             read_files(full_relative)
         else: # if not a folder, must be a file
             # some pipeline function to process the file
-            # process(filename)
-            pass
+            store = file_processor(full_relative)
+            print(store)
+            print()
+            print()
