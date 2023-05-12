@@ -10,7 +10,7 @@ def make_report():
 
     #opens the file and writes to report.txt
     with open('report.txt', 'w') as report:
-        report.write("Collaborator IDS: 80908952, 51317074, 49766190, 90722907\n")
+        report.write("Collaborator IDs: 80908952, 51317074, 49766190, 90722907\n")
         report.write(f"*** Here is the data collected from using our indexer ***\n")
         report.write("-" * 57)
         report.write("\n")

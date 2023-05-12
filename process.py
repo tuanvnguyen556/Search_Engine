@@ -2,13 +2,12 @@ import json
 import re
 from bs4 import BeautifulSoup
 from nltk.tokenize import word_tokenize
-import nltk 
+
 def file_processor(given_file):
     """
     This function processes the json file and retrieves the html content.
     Then, the html content is processed.
     """
-    nltk.download('punkt')
     tokens = []
     
     open_file = open(given_file, errors='ignore') #opens the file
