@@ -1,4 +1,7 @@
 import aspose.words
+import inverted_index
+from sys import getsizeof
+
 #aspose is a third-party library that converts text files into pdf
 def make_report():
     """
@@ -16,7 +19,7 @@ def make_report():
         report.write("\n")
         report.write(f"The number of files that were indexed documents is: [{0}]\n")
         report.write(f"The number of unique words is: [{0}]\n")
-        report.write(f"The total size (in KB) of our index on disk is: [{0/1000}]\n")
+        report.write(f"The total size (in KB) of our index on disk is: [{getsizeof(inverted_index.InvertedIndex.InvertedIndexDict)}]\n")
         report.write("-" * 57)
         report.close()
     #creates the pdf
