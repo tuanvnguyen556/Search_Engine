@@ -17,7 +17,7 @@ def file_processor(given_file):
         soup = BeautifulSoup(data['content'], 'html.parser') #parses html
         text = soup.get_text(strip=True) #retrieves the content
         textWithoutSymbols = re.sub(r"[^A-Za-z0-9\s]+", "", text) #does some stripping of characters
-        tokens = word_tokenize(textithoutSymbols)
+        tokens = word_tokenize(textWithoutSymbols)
     except:
         pass
     return tokens
