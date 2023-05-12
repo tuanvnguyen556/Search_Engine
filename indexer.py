@@ -1,14 +1,12 @@
 from bs4 import BeautifulSoup
 from read_files import read_files
 import nltk
+from report import make_report
 
 def index():
     nltk.download('punkt')
-    file = "C://Store"
+    file = "C://developer"
     read_files(file)
-    # for each term... 
-        # InvertedIndex.addToInverted(term, list[tuples of id, position]) # adds each term/position tuple to inverted index
-
-
+    make_report()
 if __name__ == "__main__":
     index()
