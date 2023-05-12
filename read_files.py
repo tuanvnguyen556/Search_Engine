@@ -13,10 +13,9 @@ def read_files(filename) -> None:
             read_files(full_relative)
         else: # if not a folder, must be a file
             # some pipeline function to process the file
-            store = file_processor(full_relative)
-            print(store)
+            file_processor(full_relative)
 
 
 if __name__ == "__main__":
-    given_file = "C:\\Store"
-    read_files(given_file)
+    file = "C://Store"
+    read_files(file)

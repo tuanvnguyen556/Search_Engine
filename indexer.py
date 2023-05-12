@@ -1,7 +1,9 @@
 from bs4 import BeautifulSoup
 
+import nltk
+
 def index():
-    pass
+    nltk.download('punkt')
     # for each term... 
         # InvertedIndex.addToInverted(term, list[tuples of id, position]) # adds each term/position tuple to inverted index
 
