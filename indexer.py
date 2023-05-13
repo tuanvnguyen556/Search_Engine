@@ -5,8 +5,8 @@ from report import make_report
 
 def index():
     nltk.download('punkt')
-    file = "C://developer"
-    read_files(file)
+    directories = "C://developer"
+    read_files(directories)
     make_report()
 if __name__ == "__main__":
     index()

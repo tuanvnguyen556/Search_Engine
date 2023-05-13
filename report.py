@@ -19,7 +19,7 @@ def make_report():
         report.write("\n")
         report.write(f"The number of files that were indexed documents is: [{InvertedIndex.docID - 1}]\n")
         report.write(f"The number of unique words is: [{len(InvertedIndex.InvertedIndexDict.keys())}]\n")
-        report.write(f"The total size (in KB) of our index on disk is: [{getsizeof(InvertedIndex.InvertedIndexDict)}]\n")
+        report.write(f"The total size (in KB) of our index on disk is: [{getsizeof(InvertedIndex.InvertedIndexDict) / 1000}]\n")
         report.write("-" * 57)
         report.close()
     #creates the pdf
