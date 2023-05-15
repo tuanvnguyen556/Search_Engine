@@ -1,7 +1,0 @@
-Collaborator IDs: 80908952, 51317074, 49766190, 90722907
-*** Here is the data collected from using our indexer ***
----------------------------------------------------------
-The number of files that were indexed documents is: [55393]
-The number of unique words is: [2764037]
-The total size (in KB) of our index on disk is: [61516.544]
----------------------------------------------------------

@@ -1,8 +1,8 @@
 from indexer import index,jsonfied
-from inverted_index import InvertedIndexDict
+from inverted_index import InvertedIndex
 import json
 
 
 if __name__ == "__main__":
     index()
-    convertToJson = jsonfied(InvertedIndexDict)
+    convertToJson = jsonfied(InvertedIndex.InvertedIndexDict)
