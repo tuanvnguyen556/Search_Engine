@@ -13,7 +13,7 @@ class booleanRetrieval:
             # Return some sort of error
             
         if len(queryList) == 1:
-            return queryList
+            return InvertedIndex.InvertedIndexDict[queryList[0]][1]
         
         # Initialize a commonList which contains the common elements from the list of docIDs
         # corresponding to the given queries
