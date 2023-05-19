@@ -21,7 +21,8 @@ class booleanRetrieval:
         commonList = self.listIntersection(InvertedIndex.InvertedIndexDict[queryList[0]][1], InvertedIndex.InvertedIndexDict[queryList[1]][1])
         
         # If the query only asks for the intersection of two words, then return the current commonList
-        if len(queryList == 2): return commonList
+        if len(queryList) == 2:
+            return commonList
         
         # Otherwise, find the commonList with every other list corresponding to every other
         # query other than the first 2 queries in the queryList.
