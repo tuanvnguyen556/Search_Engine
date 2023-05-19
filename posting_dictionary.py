@@ -14,6 +14,6 @@ class Posting_Dict:
 
     def printPosting():
         """ Print all urls in the current ID_Posting """
-        for i in ID_Posting.keys():
+        for i in self.ID_Posting.keys():
             print(ID_Posting[i].url)
 
