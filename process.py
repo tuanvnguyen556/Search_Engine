@@ -7,6 +7,7 @@ from posting_dictionary import Posting_Dict # these are for creating a posting a
 from postings import Posting, docID_counter # Creates a Posting object
 from inverted_index import InvertedIndex
 
+
 import nltk 
 def file_processor(given_file):
     """
