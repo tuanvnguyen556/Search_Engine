@@ -2,15 +2,18 @@
 
 import sys
 import inverted_index
+import json
 
 def main() -> None:
-    if len(sys.argv) == 1: # no query
-        raise Exception("Please enter a query.")
-    query = [term.lower() for term in sys.argv[1:]]
-    for term in query:
-        if term not in inverted_index.InvertedIndex:
-            print(f"Term {term} has no search results.") # boolean AND: term doesn't exist, we can't really return any results
-            return None # break out of function
+    with open("indexer.txt") as f:
+        inverted_index = json.load(f)
+    while True:
+        query = input("Enter a query:")
+        if not query:
+            print("Please enter a query.")
+            continue
+        query = query.lower() # lowercase query
+        
 
     # lst_doc_IDs = some_intersection_function(*[inverted_index.InvertedIndex[term] for term in query])
     # printer(doc_IDs)
