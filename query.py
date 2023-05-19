@@ -20,7 +20,7 @@ def main() -> None:
             break
         else:
             retrieve_doc = booleanRetrieval()
-            print(retrieve_doc.booleanAndRetrieval(query))
+            top_urls = retrieve_doc.booleanAndRetrieval(query)
             
 
     
