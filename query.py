@@ -6,7 +6,7 @@ import json
 
 def main() -> None:
     with open("indexer.txt") as f:
-        inverted_index = json.load(f)
+        inverted_index.InvertedIndex.InvertedIndexDict = json.load(f) # load inverted index into memory
     while True:
         query = input("Enter a query:")
         if not query:
