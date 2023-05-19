@@ -7,10 +7,8 @@ class booleanRetrieval:
     
     # The booleanAndRetrieval finds the AND intersection between the provided queries.
     def booleanAndRetrieval(self, query: str):
-        queryList = query.split("AND")
+        queryList = query.split()
         
-        # if len(queryList == 0):
-            # Return some sort of error
             
         if len(queryList) == 1:
             return InvertedIndex.InvertedIndexDict[queryList[0]][1]
