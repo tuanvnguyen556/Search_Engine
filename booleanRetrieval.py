@@ -9,6 +9,9 @@ class booleanRetrieval:
     def booleanAndRetrieval(self, query: str):
         queryList = query.split()
         
+        for token in queryList:
+            if token not in InvertedIndex.InvertedIndexDict.keys():
+                return []
             
         if len(queryList) == 1:
             return InvertedIndex.InvertedIndexDict[queryList[0]][1]
