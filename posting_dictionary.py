@@ -12,8 +12,8 @@ class Posting_Dict:
         
         cls.ID_Posting[docID] = posting # set posting equal to DOC_ID
 
-    def printPosting():
+    def printPosting(self):
         """ Print all urls in the current ID_Posting """
         for i in self.ID_Posting.keys():
-            print(ID_Posting[i].url)
+            print(self.ID_Posting[i].url)
 
