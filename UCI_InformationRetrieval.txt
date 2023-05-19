@@ -1,256 +1,0 @@
-GOAL: To implement a search engine.
-Introduction
-This assignment is to be done in groups of 1, 2, 3 or 4. You can work on the same
-groups that were in place for the crawler Project if you wish to. Although this is
-presented as one single project here, it is internally it is organized in 3 separate
-milestones, each with a specic deadline, deliverables and score. You can only
-change groups between the milestones if there are strong reasons for doing so
-and if you are authorized to do so. Please, write an email to the teaching team,
-explaining why you need to change teams, and we will assess your situation.
-In doing milestones #1 and #2, make sure to consider the evaluation cri-
-teria not just of those milestones but also of milestone #3 | part of the
-milestones' evaluation will be delayed until the nal meeting with the TAs.
-You can use code that you or any classmate wrote for the previous projects.
-You cannot use code written for this project by non-group-member classmates.
-You are allowed to use any languages and libraries you want for text process-
-ing, including nltk. However, you are not allowed to use text indexing
-libraries such as Lucene, PyLucene, or ElasticSearch.
-To accommodate the various skill levels of students in this course, this as-
-signment comes in two 
-avors:
-1 Information Analyst. In this 
-avor there is some programming in-
-volved, but not much more advanced than what you already did so far.
-It is a mixture of a Text Processing project and stitching things together.
-You will use a small subset of crawled pages. Groups where ALL stu-
-dents are NOT CS nor SE/Informatics majors can choose this.
-2 Algorithms and Data Structures Developer. In this 
-avor there is
-more involved programming, and your code needs to perform well on the
-entire collection of crawled pages, under the required constraints. This
-option is available to everyone, but groups that have at least one
-CS or SE/Informatics student are REQUIRED to choose this.
-Milestones overview
-MS Goal Due date Deliverable Score
-MS #1 Initial index 17th Feb Short report + Code 2.5
-MS #2 Boolean retrieval 24th Feb Short report + Code 2.5
-MS #3 Complete search 10th Mar Report + Code + Demo 55.0
-1
-General specications
-You will develop two separate programs: an indexer and a search component.
-Indexer
-Create an inverted index for the corpus with data structures designed by you.
- Tokens: all alphanumeric sequences in the dataset.
- Stop words: do not use stopping while indexing, i.e. use all words, even
-the frequently occurring ones.
- Stemming: use stemming for better textual matches. Suggestion: Porter
-stemming, but it is up to you to choose.
- Important text: text in bold (b, strong), in headings (h1, h2, h3), and
-in titles should be treated as more important than the in other places.
-Verify which are the relevant HTML tags to select the important words.
-Search
-Your program should prompt the user for a query. This doesn't need to be
-a Web interface, it can be a console prompt. At the time of the query,
-your program will stem the query terms, look up your index, perform some
-calculations (see ranking below) and give out the ranked list of pages that are
-relevant for the query, with the most relevant on top. Pages should be identied
-at least by their URLs (but you can use more informative representations).
- Ranking: at the very least, your ranking formula should include tf-idf,
-and consider the important words, but you are free to add additional
-components to this formula if you think they improve the retrieval.
-Extra Credit
-Extra percentual credit1 will be given for tasks that improve the retrieval and
-the user search - except for the GUI, you must code from scratch. For example:
- Detect and eliminate duplicate pages. (1 pt for exact, 2 pts for near)
- Add HITS and Page Rank to ranking. (1.5 pts HITS, 2.5 for PR)
- Implement 2-gram and 3-gram indexing and use it in retrieval. (1 pt)
- Enhance the index with word positions and use them for retrieval. (2 pts)
- Index anchor words for the target pages. (1 pt).
- Implement a Web or local GUI interface instead of using the console.
-(1 pt for the local GUI, 2 pts for a web GUI)
-1These are percentual points, i.e., in Winter 2023, Assignment 3 values 60 points in the
-assignment grade, so one extra percentual point values 0.6 points of the assignment grade.
-2
-Additional Specications for Information Analyst
-Option available to all groups formed only by non-CS and non-SE students.
-Programming skills required
-Intro courses.
-Main challenges
-HTML and JSON parsing, read/write structured information from/to les or
-databases.
-Corpus
-A small portion of the ICS web pages (analyst.zip).
-Indexer
-You can use a database to store the index, or a simple le { whatever is simpler
-to you. If you store it in a le, the index is expected to be suciently small, so
-that it ts in memory all at once.
-Search interface
-The response to search queries should be less than 2 seconds.
-Note
-This project can be a great addition to your resume and job interviews:
- Tired: \Wrote a Python script that nds words in Web pages."
- Wired: \Wrote a search engine from the ground up that is capable of
-handling two thousand documents or Web pages."
-3
-Additional Specications for Algorithms and Data
-Structures Developer
-Option available to all students. Required for CS and SE students.
-Programming skills required
-Advanced.
-Main challenges
-Design ecient data structures, devise ecient le access, balance memory us-
-age and response time.
-Corpus
-A large collection of ICS web pages (developer.zip).
-Indexer
-Your index should be stored in one or more les in the le system (no databases!).
-Search interface
-The response to search queries should be  300ms. Ideally it would be . 100ms,
-but you won't be penalized if it's higher (as long as it's kept  300ms).
-Operational constraints
-Typically, the cloud servers/VMs/containers that run search engines don't have
-a lot of memory. As such, you must design and implement your programs as
-if you are dealing with very large amounts of data, so large that you cannot
-hold the inverted index all in memory. Your indexer must o load the inverted
-index hash map from main memory to a partial index on disk at least 3 times
-during index construction; those partial indexes should be merged in the end.
-Optionally, after or during merging, they can also be split into separate index
-les with term ranges. Similarly, your search component must not load the
-entire inverted index in main memory. Instead, it must read the postings from
-the index(es) les on disk. The TAs will verify that this is happening.
-Note
-This project is a great addition to your resume and job interviews:
- Tired: \Wrote a Web search engine using ElasticSearch."
- Wired: \Wrote a search engine from the ground up that is capable of
-handling tens of thousands of documents or Web pages, under harsh op-
-erational constriants and having a query response time under 300ms."
-4
-Milestone 1
-Goal: Build an index
-Building the inverted index
-Now that you have been provided the HTML les to index, you may build your
-inverted index o of them. The inverted index is simply a map with the token
-as a key and a list of its corresponding postings. A posting is the representation
-of the token's occurrence in a document. The posting typically (not limited to)
-contains the following info (you are encouraged to think of other attributes that
-you could add to the index):
- The document name/id the token was found in.
- Its tf-idf score for that document (for MS1, add only the term frequency).
-Some tips:
- When designing your inverted index, you will think about the structure
-of your posting rst.
- You would normally begin by implementing the code to calculate/fetch
-the elements which will constitute your posting.
- Modularize. Use scripts/classes that will perform a function or a set of
-closely related functions. This helps in keeping track of your progress,
-debugging, and also dividing work amongst teammates if you're in a group.
- We recommend you use GitHub as a mechanism to work with your team
-members on this project, but you are not required to do so.
-Deliverables
-Submit your code and a report (in pdf) to with the following content:
- a table with assorted numbers pertaining to your index. It should have,
-at least the number of documents, the number of [unique] tokens, and the
-total size (in KB) of your index on disk.
-Note for the developer option: at this time, you do not need to have the
-optimized index, but you may save time if you do.
-Evaluation criteria
- Did your report show up on time?
- Are the reported numbers plausible?
-5
-Milestone 2
-Goal: Develop a search and retrieval component
-At least the following queries should be used to test your retrieval:
-1 cristina lopes
-2 machine learning
-3 ACM
-4 master of software engineering
-Developing the Search component
-Once you have built the inverted index, you are ready to test document retrieval
-with queries. At the very least, the search should be able to deal with boolean
-queries: AND only.
-If you wish, you can sort the retrieved documents based on tf-idf scoring
-(you are not required to do so now, but doing it now may save you time in
-the future). This can be done using the cosine similarity method. Feel free to
-use a library to compute cosine similarity once you have the term frequencies
-and inverse document frequencies (although it should be very easy for you to
-write your own implementation). You may also add other weighting/scoring
-mechanisms to help rene the search results.
-Deliverables
-Submit your code and a report (in pdf) to Canvas with the following content:
- the top 5 URLs for each of the queries above
- a picture of your search interface in action
-Note for the developer option: at this time, you do not need to have the
-optimized index, but you may save time if you do.
-Evaluation criteria
- Did your report show up on time?
- Are the reported URLs plausible?
-6
-Milestone 3
-Goal: Develop a complete search engine
-During this last stretch, you will improve and nalize your search engine.
-Come up with a set of at least 20 queries that guide you in evaluating
-how well your search engine performs, both in terms of ranking performance
-(eectiveness) and in terms of runtime performance (eciency). At least half of
-those queries should be chosen because they do poorly on one or both criteria;
-the other half should do well. Then change your code to make it work better
-for the queries that perform poorly, while preserving the good performance of
-the other ones, and while being as general as possible.
-Deliverables
- Submit on Canvas a zip le containing all the programs you wrote for this
-project, as well as a pure text README.txt le describing how to use
-your software (i.e. at lesat: how to run the code that creates the index,
-how to start the search interface and how to perform a simple query) and
-a TEST.txt pure-text document with the test queries that you used to
-evaluate your engine (no need to report the results) and with comments
-on which ones started by doing poorly and explanations of what you did
-to make them perform better. (important note: you do not need to add
-the index le in the zip, since we should be able to recreate it if needed.)
- A live demonstration of your search engine for the TAs. You are expected
-to share your screen and guide the TAs through the code that you wrote,
-and also to turn on your video. All members of the group need to be able
-to answer questions related to the project and search engines in general
-during this demo. If one or more members do not show up in the interview,
-they will get zero. In Spring 2022, the interviews will be in-person.
-Evaluation criteria
- Does your search engine work as expected of search engines?
- How general are the heuristics that you employed to improve the retrieval?
- Is the search response time under the expected limit?
- Do you demonstrate in-depth knowledge of how your search engine works?
-Are you able to answer detailed questions pertaining to any aspect of its
-implementation?
-Note for the developer option: at the end of the project, you should have
-the optimized index that allows you to run both the indexer and the search with
-small memory footprint, smaller than the index size.
-7
-Important reminder
-Add proper comments throughout your code. We shouldn't need to ask you to
-do this at this point in your careers, but we keep this note here as a reminder.
-Understanding the dataset
-In Assignment 2, your crawlers crawled the many web sites associated with ICS.
-To avoid you need to crawl again and save you some time, we collected a chunk
-of these pages and are providing them to you.
-Data les
-There are two zip les: analyst.zip and developer.zip. The names should be
-self-explanatory: the former is for the analyst 
-avor of the project; the latter
-is for the algorithms and data structures developer option. The only dierence
-between them is the size: analyst.zip contains only 3 domains2 and a little over
-2,000 pages, while developer.zip contains 88 domains and little under 56,000
-pages. The following is an explanation of how the data is organized.
-Folders: There is one folder per domain. To simplify your work, each JSON
-le inside a folder corresponds to one web page (note that you would not do this
-in an operational environemnt).
-Files: The les are stored in JSON format, with the following elds:
- url: contains the URL of the page. Ignore the fragment parts, if you see
-them around.
- content: contains the content of the page, as found during crawling
- encoding: an indication of the encoding of the webpage.
-Broken or missing HTML
-Real HTML pages found out there are full of bugs. Some of the pages in the
-dataset may not contain any HTML at all and, when they do, it may not be well
-formed. For example, there might be an open <strong> tag but the associated
-closing </strong> tag might be missing. While selecting the parser library
-for your project or writing your own, please ensure that it can handle broken
-HTML.
-2Domains, for the purposes of this project.
-8
