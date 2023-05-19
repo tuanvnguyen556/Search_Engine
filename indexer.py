@@ -12,12 +12,16 @@ def index():
     read_files(directories)
     make_report()
 
-def jsonfied(indexer: dict):
-    json_object = json.dumps(indexer)
+def jsonfied(indexer: dict, posting: dict):
+    json_object1 = json.dumps(indexer)
+    json_object2 = json.dumps(posting)
+    with open("indexer.txt", "w") as json_file1:
+        json_file1.write(json_object1)
+        json_file1.close()
 
-    with open("indexer.txt", "w") as json_file:
-        json_file.write(json_object)
-        json_file.close()
+    with open("posting.txt", "w") as json_file2:
+        json_file2.write(json_object2)
+        json_file2.close()
 
 if __name__ == "__main__":
     pass
