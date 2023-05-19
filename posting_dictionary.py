@@ -11,4 +11,9 @@ class Posting_Dict:
             raise KeyError(f"{docID} already exists as a key.")
         
         cls.ID_Posting[docID] = posting # set posting equal to DOC_ID
-    
+
+    def printPosting():
+        """ Print all urls in the current ID_Posting """
+        for i in ID_Posting.keys():
+            print(ID_Posting[i].url)
+
