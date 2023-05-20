@@ -19,19 +19,13 @@ def main() -> None:
         elif query == "quit the query":
             break
         else:
-            retrieve_doc = booleanRetrieval()
-            top_urls = retrieve_doc.booleanAndRetrieval(query)
+            retrieve_doc = booleanRetrieval(query)
+            save_docIDs = retrieve_doc.booleanAndRetrieval()
+            retrieve_doc.print_urls(save_docIDs)
+
             
 
-    
-        
 
-
-    # lst_doc_IDs = some_intersection_function(*[inverted_index.InvertedIndex[term] for term in query])
-    # printer(doc_IDs)
-    
-
-    
 
 if __name__ == "__main__":
     main()
