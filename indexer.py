@@ -7,8 +7,7 @@ import json
 
 def index():
     nltk.download('punkt')
-
-    directories = "C://Store"
+    directories = "C://developer"
     read_files(directories)
     #make_report()
 
@@ -27,4 +26,4 @@ def jsonfied_posting(posting: dict):
         json_file2.close()
 
 if __name__ == "__main__":
-    pass
+   pass

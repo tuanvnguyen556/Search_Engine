@@ -47,13 +47,16 @@ class booleanRetrieval:
             best_urls = {}
             for i in commonList:
                 counter = 0 
-                for tok, freq in Posting_Dict.ID_Posting[i]['content'].items():
+                for tok, freq in Posting_Dict.ID_Posting[str(i)]['content'].items():
                     if tok in self.queryList:
                         counter += freq
                 best_urls[i] = counter
             display_urls = sorted([(hashing, frequencies)for hashing, frequencies in best_urls.items()], key= (lambda x: -x[1]))
             for hash in range(5):
-                print(f"Here is a url of interest: {display_urls[hash]}")
+                if hash not in range(len(display_urls)):
+                    break
+                else:
+                    print(f"Here is a url of interest: {Posting_Dict.ID_Posting[str(display_urls[hash][0])]['url']}")
 
             
 

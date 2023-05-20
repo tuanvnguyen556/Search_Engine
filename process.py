@@ -15,7 +15,7 @@ def file_processor(given_file):
     Then, the html content is processed.
     """
     tokens = []
-    
+    data = None
     open_file = open(given_file, errors='ignore') #opens the file
     docID_counter.increment() # increment the ID by 1
     try:
@@ -24,12 +24,13 @@ def file_processor(given_file):
         soup = BeautifulSoup(data['content'], 'html.parser') #parses html
         text = soup.get_text(strip=True) #retrieves the content
         textWithoutSymbols = re.sub(r"[^A-Za-z0-9\s]+", "", text) #does some stripping of characters
-        Posting_Dict.addPosting(docID=InvertedIndex.docID, url=data['url'], encoding=data['encoding'])
         tokens = word_tokenize(textWithoutSymbols.lower()) #tokenizes the string and lowercases them
     except Exception as e:
         print(e)
     open_file.close()
-    return tokens
+
+    return tokens, data
+    
 
 
 if __name__ == "__main__":

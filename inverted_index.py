@@ -12,11 +12,12 @@ class InvertedIndex:
     docID = 1
     
     @classmethod
-    def appendInverted(cls, tokenLst: list):
+    def appendInverted(cls, tokenLst: list, data: dict):
         """
         This method iterates over the tokenList of tokens and inserts into the dictionary
         frequencyCounter as well as the docID of the current doc. 
         """
+        
         token_frequency = {}
         for token in tokenLst:
             # Check if token in dictionary. If not, create new key = token and value = [[frequency = 1],[docID = 1]]
@@ -36,6 +37,6 @@ class InvertedIndex:
             else:
                 token_frequency[token] += 1
         # Increment the overall docID
-        Posting_Dict.ID_Posting[cls.docID]['content'] = token_frequency
+        Posting_Dict.addPosting(docID=InvertedIndex.docID, url=data['url'], encoding=data['encoding'], content=token_frequency)
         cls.docID += 1
-        
+        return token_frequency
