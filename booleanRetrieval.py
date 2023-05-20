@@ -42,15 +42,17 @@ class booleanRetrieval:
         if len(commonList) == 0:
             print(f"Try changing your query request. No documents were found with the provided query.\n")
         elif len(commonList) == 1:
-            print(f"Here is a url of interest: {Posting_Dict.ID_Posting[commonList[0]]['url']}\n")
+            if commonList[0] in Posting_Dict.ID_Posting.keys():
+                print(f"Here is a url of interest: {Posting_Dict.ID_Posting[commonList[0]]['url']}\n")
         else:
             best_urls = {}
             for i in commonList:
-                counter = 0 
-                for tok, freq in Posting_Dict.ID_Posting[str(i)]['content'].items():
-                    if tok in self.queryList:
-                        counter += freq
-                best_urls[i] = counter
+                if commonList[str(i)] in Posting_Dict.ID_Posting.keys():
+                    counter = 0 
+                    for tok, freq in Posting_Dict.ID_Posting[str(i)]['content'].items():
+                        if tok in self.queryList:
+                            counter += freq
+                    best_urls[i] = counter
             display_urls = sorted([(hashing, frequencies)for hashing, frequencies in best_urls.items()], key= (lambda x: -x[1]))
             for hash in range(5):
                 if hash not in range(len(display_urls)):
