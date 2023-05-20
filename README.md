@@ -17,11 +17,16 @@ Use this command on the terminal
 
 pip install beautifulsoup4
 
+To make requests to websites
+Use this command on the terminal
+
+pip install requests
 
 Overall use these commands to run this program
 1. pip install aspose-words
 2. pip install beautifulsoup4
 3. pip install --user -U nltk
+4. pip install requests
 
 Make sure to change the directories variable in indexer script
 to the path of where the developer folder is located in your system
