@@ -25,7 +25,7 @@ def file_processor(given_file):
             textWithoutSymbols = re.sub(r"[^A-Za-z0-9\s]+", "", text) #does some stripping of characters
             tokens = word_tokenize(textWithoutSymbols.lower()) #tokenizes the string and lowercases them
     except Exception as e:
-        print(e)
+        pass #ignore the error
     open_file.close()
 
     return tokens, data
