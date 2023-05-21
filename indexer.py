@@ -7,7 +7,7 @@ import json
 
 def index():
     nltk.download('punkt')
-    directories = "C://developer"
+    directories = "C://Store"
     read_files(directories)
     #make_report()
 
