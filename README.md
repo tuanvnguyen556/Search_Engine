@@ -22,11 +22,17 @@ Use this command on the terminal
 
 pip install requests
 
+To run the user interface
+Use this command on the terminal
+
+pip install flask
+
 Overall use these commands to run this program
 1. pip install aspose-words
 2. pip install beautifulsoup4
 3. pip install --user -U nltk
 4. pip install requests
+5. pip install flask
 
 Make sure to change the directories variable in indexer script
 to the path of where the developer folder is located in your system
