@@ -1,4 +1,4 @@
-from inverted_index import *
+from inverted_index import InvertedIndex
 from posting_dictionary import Posting_Dict
 class booleanRetrieval:
     """
@@ -9,10 +9,9 @@ class booleanRetrieval:
         self.top_urls = []
     # The booleanAndRetrieval finds the AND intersection between the provided queries.
     def booleanAndRetrieval(self):        
-        for token in self.queryList:
-            if token not in InvertedIndex.InvertedIndexDict.keys():
+        for i in self.queryList:
+            if i not in InvertedIndex.InvertedIndexDict.keys():
                 return []
-            
         if len(self.queryList) == 1:
             return InvertedIndex.InvertedIndexDict[self.queryList[0]][1]
         
@@ -47,7 +46,7 @@ class booleanRetrieval:
         else:
             best_urls = {}
             for i in commonList:
-                if commonList[str(i)] in Posting_Dict.ID_Posting.keys():
+                if str(i) in Posting_Dict.ID_Posting.keys():
                     counter = 0 
                     for tok, freq in Posting_Dict.ID_Posting[str(i)]['content'].items():
                         if tok in self.queryList:
@@ -59,7 +58,22 @@ class booleanRetrieval:
                     break
                 else:
                     print(f"Here is a url of interest: {Posting_Dict.ID_Posting[str(display_urls[hash][0])]['url']}")
-
+    def give_url_list(self, commonList):
+        if len(commonList) == 0:
+            return []
+        elif len(commonList) == 1:
+            if commonList[0] in Posting_Dict.ID_Posting.keys():
+                return [Posting_Dict.ID_Posting[commonList[0]]['url']]
+        else:
+            best_urls = {}
+            for i in commonList:
+                if str(i) in Posting_Dict.ID_Posting.keys():
+                    counter = 0 
+                    for tok, freq in Posting_Dict.ID_Posting[str(i)]['content'].items():
+                        if tok in self.queryList:
+                            counter += freq
+                    best_urls[i] = counter
+            return sorted([(hashing, frequencies)for hashing, frequencies in best_urls.items()], key= (lambda x: -x[1]))
             
 
         
