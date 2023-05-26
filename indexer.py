@@ -3,7 +3,7 @@ from read_files import read_files
 import nltk
 from report import make_report
 import json
-
+import csv
 
 def index():
     nltk.download('punkt')
@@ -24,6 +24,17 @@ def jsonfied_posting(posting: dict):
     with open("posting.txt", "w") as json_file2:
         json_file2.write(json_object2)
         json_file2.close()
+
+def tsvfied(indexer: dict):
+    keysToSort = list(indexer.keys())
+    keysToSort.sort()
+
+    with open("indexer.tsv", "w") as tsv_file:
+        tsv_writer = csv.writer(tsv_file, delimiter='\t', lineterminator='\n')
+        tsv_writer.writerow(["Token", "Frequency", "PositionsMap"])
+        for k in keysToSort:
+            tsv_writer.writerow([k, indexer[k][0], indexer[k][1:]])
+
 
 if __name__ == "__main__":
    pass
