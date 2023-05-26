@@ -17,7 +17,8 @@ def read_files(filename) -> None:
             tokenList, code = file_processor(full_relative)
             if code:
                 start = inverted_index.InvertedIndex()
-                start.appendInverted(tokenList, code)
+                #start.appendInverted(tokenList, code)
+                start.newAppendInverted(tokenList, code)
             
             
 

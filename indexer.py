@@ -37,4 +37,4 @@ def tsvfied(indexer: dict):
 
 
 if __name__ == "__main__":
-   pass
+   index()
