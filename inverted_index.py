@@ -10,7 +10,7 @@ class InvertedIndex:
     InvertedIndexDict = dict()
     # Start at docID = 1
     docID = 1
-    
+    # token : [freq, [docID1, pos1, pos2], [docID2, pos1, pos2], ...]
     @classmethod
     def appendInverted(cls, tokenLst: list, data: dict):
         """

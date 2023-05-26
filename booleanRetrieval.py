@@ -58,6 +58,7 @@ class booleanRetrieval:
                     break
                 else:
                     print(f"Here is a url of interest: {Posting_Dict.ID_Posting[str(display_urls[hash][0])]['url']}")
+    
     def give_url_list(self, commonList):
         if len(commonList) == 0:
             return []

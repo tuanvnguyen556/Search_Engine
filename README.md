@@ -62,3 +62,8 @@ quit the query
 
 You will be given the top 5 urls if there are enough urls for 5
 otherwise it will give you the top amount the lookup can find
+
+
+Inverted Index:
+object with positions
+stashing 1 GB of dict memory into a file
