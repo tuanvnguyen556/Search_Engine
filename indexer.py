@@ -25,15 +25,15 @@ def jsonfied_posting(posting: dict):
         json_file2.write(json_object2)
         json_file2.close()
 
-def csvfied(indexer: dict):
+def tsvfied(indexer: dict):
     keysToSort = list(indexer.keys())
     keysToSort.sort()
 
-    with open("indexer.txt", "w") as csv_file:
-        writer = csv.DictWriter(csv_file, fieldnames=['Token', 'Frequency', 'docID'])
-        writer.writeheader()
+    with open("indexer.tsv", "w") as tsv_file:
+        tsv_writer = csv.writer(tsv_file, delimiter='\t', lineterminator='\n')
+        tsv_writer.writerow(["Token", "Frequency", "PositionsMap"])
         for k in keysToSort:
-            writer.writerow(indexer[k])
+            tsv_writer.writerow([k, indexer[k][0], indexer[k][1:]])
 
 
 if __name__ == "__main__":
