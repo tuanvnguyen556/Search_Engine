@@ -43,9 +43,6 @@ class InvertedIndex:
 
     @classmethod
     def newAppendInverted(cls, tokenLst: list, data: dict):
-        print(tokenLst)
-        print()
-        print()
         """
         This method iterates over the tokenList of tokens and inserts into the dictionary
         frequencyCounter as well as the docID of the current doc. 

@@ -7,7 +7,7 @@ import csv
 
 def index():
     nltk.download('punkt')
-    directories = "C://Store"
+    directories = "C://developer"
     read_files(directories)
     #make_report()
 
