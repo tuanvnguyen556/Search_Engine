@@ -2,7 +2,7 @@ import json
 import re
 from bs4 import BeautifulSoup
 from nltk.tokenize import word_tokenize
-
+from fragment import Remove_fragments
 from postings import docID_counter # Creates a Posting object
 import requests
 
@@ -20,6 +20,9 @@ def file_processor(given_file):
         data = json.load(open_file) #loads the json format
         create_request = requests.get(data['url'])
         if 200 <= create_request.status_code < 400:
+            fragmenter = Remove_fragments()
+            if not fragmenter.remove_fragment(data['url']):
+                return tokens, data
             soup = BeautifulSoup(create_request.text, 'html.parser') #parses html
             text = soup.get_text(strip=True) #retrieves the content
             textWithoutSymbols = re.sub(r"[^A-Za-z0-9\s]+", "", text) #does some stripping of characters
