@@ -27,10 +27,6 @@ def jsonfied_posting(posting: dict):
 
 
 def tsvfied(indexer: dict):
-    #keysToSort = list(indexer.keys())
-    
-    #keysToSort.sort()
-    #print(keysToSort)
     with open("indexer.tsv", "w") as tsv_file:
         tsv_writer = csv.writer(tsv_file, delimiter='\t', lineterminator='\n')
         #tsv_writer.writerow(["Token", "Frequency", "PositionsMap"])
