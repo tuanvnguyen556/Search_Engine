@@ -17,7 +17,7 @@ class booleanRetrieval:
         
         # Initialize a commonList which contains the common elements from the list of docIDs
         # corresponding to the given queries
-        queryList = sorted([InvertedIndex.Dict[key] for key in query], key=len)
+        queryList = sorted([InvertedIndex.Dict[key] for key in self.queryList], key=len)
         commonList = self.listIntersection(queryList[0], queryList[1])
         # commonList = self.listIntersection(InvertedIndex.InvertedIndexDict[queryList[0]][1], InvertedIndex.InvertedIndexDict[queryList[1]][1])
         

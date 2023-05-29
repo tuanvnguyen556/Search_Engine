@@ -8,3 +8,4 @@ if __name__ == "__main__":
     index()
     jsonfied(InvertedIndex.InvertedIndexDict)
     jsonfied_posting(Posting_Dict.ID_Posting)
+    InvertedIndex.write_to_file()

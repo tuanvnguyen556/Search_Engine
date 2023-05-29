@@ -1,4 +1,8 @@
 from posting_dictionary import Posting_Dict
+import sys # for writing to file
+from indexer import tsvfied
+import json
+
 class InvertedIndex:
     """
     Creates the inverted index for every token in every document.
@@ -11,6 +15,9 @@ class InvertedIndex:
     # Start at docID = 1
     docID = 1
     # token : [freq, [docID1, pos1, pos2], [docID2, pos1, pos2], ...]
+
+    terms_to_position = dict()
+
     @classmethod
     def appendInverted(cls, tokenLst: list, data: dict):
         """
@@ -68,8 +75,27 @@ class InvertedIndex:
             else:
                 token_frequency[token] += 1
             positionCounter += 1
+
+        if sys.getsizeof(cls.InvertedIndexDict) > 100000000: # > 100 MB for testing
+            cls.write_to_file()
             
         # Increment the overall docID
         #Posting_Dict.addPosting(docID=InvertedIndex.docID, url=data['url'], encoding=data['encoding'], content=token_frequency)
         cls.docID += 1
         return token_frequency
+    
+    @classmethod
+    def write_to_file(cls) -> None:
+        """ Writes the current inverted_index_dict to a tsv file."""
+        new_terms_dict = tsvfied(cls.InvertedIndexDict)
+        for key in new_terms_dict:
+            if key in cls.terms_to_position:
+                cls.terms_to_position[key].append(new_terms_dict[key])
+            else:
+                cls.terms_to_position[key] = [new_terms_dict[key]]
+
+    @classmethod
+    def write_positions(cls):
+        """ At the end, write the final inverted_index dict to a json file. """
+        with open("indexer_positions.json", "w") as f:
+            json.dump(cls.terms_to_postition, f)
