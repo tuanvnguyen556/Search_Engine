@@ -17,7 +17,9 @@ class booleanRetrieval:
         
         # Initialize a commonList which contains the common elements from the list of docIDs
         # corresponding to the given queries
-        commonList = self.listIntersection(InvertedIndex.InvertedIndexDict[self.queryList[0]][1], InvertedIndex.InvertedIndexDict[self.queryList[1]][1])
+        queryList = sorted([InvertedIndex.Dict[key] for key in query], key=len)
+        commonList = self.listIntersection(queryList[0], queryList[1])
+        # commonList = self.listIntersection(InvertedIndex.InvertedIndexDict[queryList[0]][1], InvertedIndex.InvertedIndexDict[queryList[1]][1])
         
         # If the query only asks for the intersection of two words, then return the current commonList
         if len(self.queryList) == 2:
@@ -25,9 +27,10 @@ class booleanRetrieval:
         
         # Otherwise, find the commonList with every other list corresponding to every other
         # query other than the first 2 queries in the queryList.
-        for index in range(2, len(self.queryList)):
-            commonList = self.listIntersection(InvertedIndex.InvertedIndexDict[self.queryList[index]][1], commonList)
-        
+        for index in range(2, len(queryList)):
+            #commonList = self.listIntersection(InvertedIndex.InvertedIndexDict[queryList[index]][1], commonList)
+            commonList = self.listIntersection(queryList[index], commonList)
+
         # Return the final list of common documents
         return commonList
             
