@@ -32,7 +32,7 @@ def tsvfied(indexer: dict):
     #print(keysToSort)
     with open("indexer.tsv", "w") as tsv_file:
         tsv_writer = csv.writer(tsv_file, delimiter='\t', lineterminator='\n')
-        tsv_writer.writerow(["Token", "Frequency", "PositionsMap"])
+        #tsv_writer.writerow(["Token", "Frequency", "PositionsMap"])
         for k in indexer.keys():
             tsv_writer.writerow([k, indexer[k][0], indexer[k][1:]])
 
