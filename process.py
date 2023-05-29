@@ -3,7 +3,6 @@ import re
 from bs4 import BeautifulSoup
 from nltk.tokenize import word_tokenize
 from fragment import Remove_fragments
-from postings import docID_counter # Creates a Posting object
 import requests
 
 import nltk 
@@ -15,7 +14,6 @@ def file_processor(given_file):
     tokens = []
     data = None
     open_file = open(given_file, errors='ignore') #opens the file
-    docID_counter.increment() # increment the ID by 1
     try:
         data = json.load(open_file) #loads the json format
         create_request = requests.get(data['url'])
