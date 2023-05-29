@@ -14,9 +14,11 @@ def read_files(filename) -> None:
             read_files(full_relative)
         else: # if not a folder, must be a file
             # some pipeline function to process the file
-            tokenList = file_processor(full_relative)
-            start = inverted_index.InvertedIndex()
-            start.appendInverted(tokenList)
+            tokenList, code = file_processor(full_relative)
+            if code:
+                start = inverted_index.InvertedIndex()
+                #start.appendInverted(tokenList, code)
+                start.newAppendInverted(tokenList, code)
             
             
 
