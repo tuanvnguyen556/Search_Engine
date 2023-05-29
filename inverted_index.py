@@ -80,7 +80,7 @@ class InvertedIndex:
             cls.write_to_file()
             
         # Increment the overall docID
-        #Posting_Dict.addPosting(docID=InvertedIndex.docID, url=data['url'], encoding=data['encoding'], content=token_frequency)
+        Posting_Dict.addPosting(docID=InvertedIndex.docID, url=data['url'], encoding=data['encoding'], content=token_frequency)
         cls.docID += 1
         return token_frequency
     
