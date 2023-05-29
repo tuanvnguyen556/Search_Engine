@@ -70,6 +70,6 @@ class InvertedIndex:
             positionCounter += 1
             
         # Increment the overall docID
-        #Posting_Dict.addPosting(docID=InvertedIndex.docID, url=data['url'], encoding=data['encoding'], content=token_frequency)
+        Posting_Dict.addPosting(docID=InvertedIndex.docID, url=data['url'], encoding=data['encoding'], content=token_frequency)
         cls.docID += 1
         return token_frequency

@@ -4,7 +4,7 @@ import nltk
 from report import make_report
 import json
 import csv
-
+from inverted_index import InvertedIndex
 def index():
     nltk.download('punkt')
     directories = "C://developer"
@@ -37,4 +37,4 @@ def tsvfied(indexer: dict):
 
 
 if __name__ == "__main__":
-   index()
+   tsvfied(InvertedIndex.InvertedIndexDict)
