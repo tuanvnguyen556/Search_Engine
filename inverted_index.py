@@ -19,36 +19,6 @@ class InvertedIndex:
     terms_to_position = dict()
 
     @classmethod
-    def appendInverted(cls, tokenLst: list, data: dict):
-        """
-        This method iterates over the tokenList of tokens and inserts into the dictionary
-        frequencyCounter as well as the docID of the current doc. 
-        """
-        
-        token_frequency = {}
-        for token in tokenLst:
-            # Check if token in dictionary. If not, create new key = token and value = [[frequency = 1],[docID = 1]]
-            if token not in cls.InvertedIndexDict:
-                cls.InvertedIndexDict[token] = [1,[cls.docID]]
-            else:
-                # If the token already is in dictioary, check if the current docID is in the docID list.
-                # By doing so, we avoid duplicates if the same token is in the same document.
-                if cls.docID in cls.InvertedIndexDict[token][1]:
-                    pass
-                else:
-                    # Increament the frequency, and append the new docId in the docID list.
-                    cls.InvertedIndexDict[token][0] += 1
-                    cls.InvertedIndexDict[token][1].append(cls.docID)
-            if token not in token_frequency:
-                token_frequency[token] = 1
-            else:
-                token_frequency[token] += 1
-        # Increment the overall docID
-        Posting_Dict.addPosting(docID=InvertedIndex.docID, url=data['url'], encoding=data['encoding'], content=token_frequency)
-        cls.docID += 1
-        return token_frequency
-
-    @classmethod
     def newAppendInverted(cls, tokenLst: list, data: dict):
         """
         This method iterates over the tokenList of tokens and inserts into the dictionary

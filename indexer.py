@@ -25,7 +25,5 @@ def jsonfied_posting(posting: dict):
         json_file2.write(json_object2)
         json_file2.close()
 
-
-
 if __name__ == "__main__":
    pass
