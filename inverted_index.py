@@ -1,6 +1,6 @@
 from posting_dictionary import Posting_Dict
 import sys # for writing to file
-from indexer import tsvfied
+import csv
 import json
 
 class InvertedIndex:
@@ -71,3 +71,18 @@ class InvertedIndex:
         """ At the end, write the final inverted_index dict to a json file. """
         with open("indexer_positions.json", "w") as f:
             json.dump(cls.terms_to_postition, f)
+
+def tsvfied(indexer: dict):
+    #keysToSort = list(indexer.keys())
+    
+    #keysToSort.sort()
+    #print(keysToSort)
+    with open("indexer.tsv", "w") as tsv_file:
+        tsv_writer = csv.writer(tsv_file, delimiter='\t', lineterminator='\n')
+        #tsv_writer.writerow(["Token", "Frequency", "PositionsMap"])
+        terms_dict = {}
+        for k in indexer.keys():
+            terms_dict[k] = tsv_file.tell() # tells us the index position
+            tsv_writer.writerow([k, indexer[k][0], indexer[k][1:]])
+    
+    return terms_dict
