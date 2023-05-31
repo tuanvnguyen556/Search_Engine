@@ -11,8 +11,6 @@ def home():
     if request.method == "GET":
         return render_template("app_index.html") #returns the home page
     else:
-        import time
-        start_time = time.time()
         given_query = request.form["query"]
 
         retrieve_doc = booleanRetrieval(given_query)
@@ -30,10 +28,10 @@ def home():
 
 
 if __name__ == "__main__":
-    with open("indexer.txt") as f1:
+    with open("indexer.txt") as f1: #loads the content into memory
         InvertedIndex.InvertedIndexDict = json.load(f1)
     
-    with open("posting.txt") as f2:
+    with open("posting.txt") as f2: #loads the content into memory
         Posting_Dict.ID_Posting = json.load(f2)
         
     app.run(debug=True) #automatically reruns web server

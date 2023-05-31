@@ -1,6 +1,4 @@
 """ Run this file and enter a query from the terminal. """
-
-import sys
 import json
 from booleanRetrieval import booleanRetrieval
 from inverted_index import InvertedIndex

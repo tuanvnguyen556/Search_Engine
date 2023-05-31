@@ -69,7 +69,7 @@ class InvertedIndex:
     @classmethod
     def write_positions(cls):
         """ At the end, write the final inverted_index dict to a json file. """
-        with open("indexer_positions.json", "w") as f:
+        with open("indexer_positions.json", "a") as f:
             json.dump(cls.terms_to_postition, f)
 
 def tsvfied(indexer: dict):
