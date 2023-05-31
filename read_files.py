@@ -9,6 +9,7 @@ def read_files(filename) -> None:
     
     for file in os.listdir(filename):
         full_relative = os.path.join(filename, file)
+        print(full_relative)
 
         if os.path.isdir(full_relative): # must iterate through a subdirectory
             read_files(full_relative)
