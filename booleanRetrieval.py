@@ -4,7 +4,6 @@ class booleanRetrieval:
     This class operates different booleanRetrieval models from the indexer created in milestone 1.
     """
     def __init__(self):
-        # self.queryList = query.split()
         self.top_urls = []
     
     

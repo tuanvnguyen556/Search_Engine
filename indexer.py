@@ -1,6 +1,5 @@
 from read_files import read_files
 import nltk
-from report import make_report
 import json
 
 

@@ -3,6 +3,7 @@ import json
 from booleanRetrieval import booleanRetrieval
 from inverted_index import InvertedIndex
 from posting_dictionary import Posting_Dict
+
 def main() -> None:
     with open("indexer.txt") as f1:
         InvertedIndex.InvertedIndexDict = json.load(f1)
