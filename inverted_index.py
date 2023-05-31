@@ -80,5 +80,7 @@ def tsvfied(indexer: dict):
         for k in indexer.keys():
             terms_dict[k] = tsv_file.tell() # tells us the index position
             tsv_writer.writerow([k, indexer[k][0], indexer[k][1:]]) #format of the tsv
+
+            tsv_file.close()
     
     return terms_dict
