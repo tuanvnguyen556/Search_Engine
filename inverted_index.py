@@ -63,6 +63,8 @@ class InvertedIndex:
                 cls.terms_to_position[key].append(new_terms_dict[key])
             else:
                 cls.terms_to_position[key] = [new_terms_dict[key]]
+        
+        cls.InvertedIndexDict.clear()
 
     @classmethod
     def write_positions(cls):
