@@ -20,36 +20,6 @@ class InvertedIndex:
     terms_to_position = dict()
 
     @classmethod
-    def appendInverted(cls, tokenLst: list, data: dict):
-        """
-        This method iterates over the tokenList of tokens and inserts into the dictionary
-        frequencyCounter as well as the docID of the current doc. 
-        """
-        
-        token_frequency = {}
-        for token in tokenLst:
-            # Check if token in dictionary. If not, create new key = token and value = [[frequency = 1],[docID = 1]]
-            if token not in cls.InvertedIndexDict:
-                cls.InvertedIndexDict[token] = [1,[cls.docID]]
-            else:
-                # If the token already is in dictioary, check if the current docID is in the docID list.
-                # By doing so, we avoid duplicates if the same token is in the same document.
-                if cls.docID in cls.InvertedIndexDict[token][1]:
-                    pass
-                else:
-                    # Increament the frequency, and append the new docId in the docID list.
-                    cls.InvertedIndexDict[token][0] += 1
-                    cls.InvertedIndexDict[token][1].append(cls.docID)
-            if token not in token_frequency:
-                token_frequency[token] = 1
-            else:
-                token_frequency[token] += 1
-        # Increment the overall docID
-        Posting_Dict.addPosting(docID=InvertedIndex.docID, url=data['url'], encoding=data['encoding'], content=token_frequency)
-        cls.docID += 1
-        return token_frequency
-
-    @classmethod
     def newAppendInverted(cls, tokenLst: list, data: dict):
         """
         This method iterates over the tokenList of tokens and inserts into the dictionary
@@ -95,17 +65,18 @@ class InvertedIndex:
                 raise Exception("Indexer_positions.json does not exist")
             else:
                 cls.merge()     
-                cls.InvertedIndexDict.clear()
         else:
             new_terms_dict = tsvfied(cls.InvertedIndexDict)
-            cls.InvertedIndexDict.clear()
             with open("indexer_positions.json", "w") as f:
                 json.dump(new_terms_dict, f)
+                cls.terms_to_position[key] = [new_terms_dict[key]]
+        
+        cls.InvertedIndexDict.clear()
 
     @classmethod
     def write_positions(cls):
         """ At the end, write the final inverted_index dict to a json file. """
-        with open("indexer_positions.json", "w") as f:
+        with open("indexer_positions.json", "a") as f:
             json.dump(cls.terms_to_postition, f)
 
     @classmethod
@@ -148,13 +119,9 @@ class InvertedIndex:
             json.dump(new_positions, new_pos_file)
 
 def tsvfied(indexer: dict):
-    #keysToSort = list(indexer.keys())
-    
-    #keysToSort.sort()
-    #print(keysToSort)
+    """This writes the inverted index as a tsv file for optimizing query time"""
     with open("indexer.tsv", "w") as tsv_file:
-        tsv_writer = csv.writer(tsv_file, delimiter='\t', lineterminator='\n')
-        #tsv_writer.writerow(["Token", "Frequency", "PositionsMap"])
+        tsv_writer = csv.writer(tsv_file, delimiter='\t', lineterminator='\n') 
         terms_dict = {}
         for k in indexer.keys():
             terms_dict[k] = tsv_file.tell() # tells us the index position

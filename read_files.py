@@ -15,11 +15,11 @@ def read_files(filename) -> None:
             read_files(full_relative)
         else: # if not a folder, must be a file
             # some pipeline function to process the file
-            tokenList, code = file_processor(full_relative)
-            if code:
-                start = inverted_index.InvertedIndex()
-                #start.appendInverted(tokenList, code)
+            tokenList, code = file_processor(full_relative) #extract token list and data truthy value
+            if code: #this was data that is used as a truthy value
+                start = inverted_index.InvertedIndex() #initializes the inverted index
                 start.newAppendInverted(tokenList, code)
+                #inserts file content into the inverted index
             
             
 

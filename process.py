@@ -12,7 +12,8 @@ def file_processor(given_file):
     Then, the html content is processed.
     """
     tokens = []
-    data = None
+    data = None #initial state to determine if a file can be processed
+
     open_file = open(given_file, errors='ignore') #opens the file
     try:
         data = json.load(open_file) #loads the json format
@@ -20,7 +21,7 @@ def file_processor(given_file):
         if 200 <= create_request.status_code < 400:
             fragmenter = Remove_fragments()
             if not fragmenter.remove_fragment(data['url']):
-                return tokens, data
+                return tokens, data #returns data == None and token == []
             soup = BeautifulSoup(create_request.text, 'html.parser') #parses html
             text = soup.get_text(strip=True) #retrieves the content
             textWithoutSymbols = re.sub(r"[^A-Za-z0-9\s]+", "", text) #does some stripping of characters
@@ -29,7 +30,9 @@ def file_processor(given_file):
         pass #ignore the error
     open_file.close()
 
-    return tokens, data
+    return tokens, data #data is used for truthy boolean comparison to see if a json object was returned
+    #data == None, then can't process the file
+    #data == json object, then file was processed 
     
 
 

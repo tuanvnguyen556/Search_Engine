@@ -1,12 +1,10 @@
 """ Run this file and enter a query from the terminal. """
-
-import sys
 import json
 import csv
 from booleanRetrieval import booleanRetrieval
 from inverted_index import InvertedIndex
 from posting_dictionary import Posting_Dict
-from retrieve_from_tsv import getTokenLst
+
 def main() -> None:
     with open("indexer_positions.json") as f1:
         positions_dict = json.load(f1)
