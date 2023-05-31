@@ -6,7 +6,7 @@ class Remove_fragments:
     within the inverted index
     '''
     unique_urls = set() #stores the unique urls
-    
+
     @classmethod #decorator to save the state of the class until the program ends
     def remove_fragment(cls, given_url: str) -> str:
         unique_url = given_url[:given_url.find('#')] #strips the fragment from the url
