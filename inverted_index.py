@@ -95,8 +95,10 @@ class InvertedIndex:
                 raise Exception("Indexer_positions.json does not exist")
             else:
                 cls.merge()     
+                cls.InvertedIndexDict.clear()
         else:
             new_terms_dict = tsvfied(cls.InvertedIndexDict)
+            cls.InvertedIndexDict.clear()
             with open("indexer_positions.json", "w") as f:
                 json.dump(new_terms_dict, f)
 
