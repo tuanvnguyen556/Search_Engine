@@ -2,6 +2,7 @@ from posting_dictionary import Posting_Dict
 import sys # for writing to file
 import csv
 import json
+from pathlib import Path
 
 class InvertedIndex:
     """
@@ -57,11 +58,17 @@ class InvertedIndex:
     @classmethod
     def write_to_file(cls) -> None:
         """ Writes the current inverted_index_dict to a tsv file."""
-        new_terms_dict = tsvfied(cls.InvertedIndexDict)
-        for key in new_terms_dict:
-            if key in cls.terms_to_position:
-                cls.terms_to_position[key].append(new_terms_dict[key])
+        indexer_path = Path("indexer.tsv")
+        positions_path = Path("indexer_positions.json")
+        if indexer_path.exists():
+            if not positions_path.exists(): # indexer exists but no index positions exist
+                raise Exception("Indexer_positions.json does not exist")
             else:
+                cls.merge()     
+        else:
+            new_terms_dict = tsvfied(cls.InvertedIndexDict)
+            with open("indexer_positions.json", "w") as f:
+                json.dump(new_terms_dict, f)
                 cls.terms_to_position[key] = [new_terms_dict[key]]
         
         cls.InvertedIndexDict.clear()
@@ -72,6 +79,45 @@ class InvertedIndex:
         with open("indexer_positions.json", "a") as f:
             json.dump(cls.terms_to_postition, f)
 
+    @classmethod
+    def merge(cls):
+        """ Binary merge on a file if it """
+        indexer_path = Path("indexer.tsv")
+        positions_path = Path("indexer_positions.json")
+        with open("indexer_positions.json") as pos_dict:
+            prev_positions = json.load(pos_dict)
+            indexer_path.rename(Path("indexer_path_old.tsv")) # make the old file indexer_path_old.tsv
+            with open("indexer_path_old.tsv") as old:
+                with open("indexer.tsv", "w") as curr:
+                    tsv_writer = csv.writer(curr, delimiter='\t', lineterminator='\n')
+                    new_positions = {}
+                    for term in prev_positions: # loop through all terms currently in the tsv file
+                        old.seek(prev_positions[term]) # f.seek(position)
+                        line = old.readline().split('\t')
+                        #print(line)
+                        try:
+                            freq = int(line[1])
+                        except:
+                            print(line)
+                            raise Exception()
+                        lst_positions = [json.loads(line[i]) for i in range(2, len(line))] # correctly gets [Token, Frequency(int), *positions(lst)]
+                        if term in cls.InvertedIndexDict: # if more data to append
+                            freq += cls.InvertedIndexDict[term][0] # add to the frequency
+                            for i in range(1, len(cls.InvertedIndexDict[term])):
+                                lst_positions.append(cls.InvertedIndexDict[term][i]) # append all found positions
+                        
+                        new_positions[term] = curr.tell() # get file position
+                        tsv_writer.writerow([term, freq, *lst_positions])
+                    
+                    for term in cls.InvertedIndexDict: # add all new terms
+                        if term in new_positions: 
+                            continue # skip term if it has already been added
+                        else: # term doesn't currently exis
+                            new_positions[term] = curr.tell()
+                            tsv_writer.writerow([term, cls.InvertedIndexDict[term][0], *cls.InvertedIndexDict[term][1:]])
+        with open("indexer_positions.json", "w") as new_pos_file: # write new positions to new index file
+            json.dump(new_positions, new_pos_file)
+
 def tsvfied(indexer: dict):
     """This writes the inverted index as a tsv file for optimizing query time"""
     with open("indexer.tsv", "w") as tsv_file:
@@ -79,8 +125,6 @@ def tsvfied(indexer: dict):
         terms_dict = {}
         for k in indexer.keys():
             terms_dict[k] = tsv_file.tell() # tells us the index position
-            tsv_writer.writerow([k, indexer[k][0], indexer[k][1:]]) #format of the tsv
-
-            tsv_file.close()
+            tsv_writer.writerow([k, indexer[k][0], *indexer[k][1:]])
     
     return terms_dict

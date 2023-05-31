@@ -1,26 +1,31 @@
 """ Run this file and enter a query from the terminal. """
 import json
+import csv
 from booleanRetrieval import booleanRetrieval
 from inverted_index import InvertedIndex
 from posting_dictionary import Posting_Dict
 
 def main() -> None:
-    with open("indexer.txt") as f1:
-        InvertedIndex.InvertedIndexDict = json.load(f1)
+    with open("indexer_positions.json") as f1:
+        positions_dict = json.load(f1)
     
     with open("posting.txt") as f2:
         Posting_Dict.ID_Posting = json.load(f2)
-        
-    while True:
-        query = input("Enter a query: ").lower()
-        if not query:
-            print("Please enter a query.")
-        elif query == "quit the query":
-            break
-        else:
-            retrieve_doc = booleanRetrieval(query)
-            save_docIDs = retrieve_doc.booleanAndRetrieval()
-            retrieve_doc.print_urls(save_docIDs)
+    
+    with open("indexer.tsv", "r") as f:    
+        file = csv.reader(f, delimiter='\t')
+        while True:
+            query = input("Enter a query: ").lower()
+            if not query:
+                print("Please enter a query.")
+            elif query == "quit the query":
+                break
+            else:
+                queryList = query.split()
+                tokenLsts = getTokenLst(file, *(positions_dict[term] for term in queryList if term in positions_dict))
+                retrieve_doc = booleanRetrieval(query)
+                save_docIDs = retrieve_doc.booleanAndRetrieval()
+                retrieve_doc.print_urls(save_docIDs)
 
             
 

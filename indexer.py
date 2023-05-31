@@ -4,6 +4,10 @@ import json
 
 
 def index():
+
+    nltk.download('punkt')
+    #make_report()
+
     '''
     This function begins the indexing
     '''
