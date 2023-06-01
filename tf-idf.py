@@ -20,3 +20,17 @@ class Calculatetfidf:
         """
         with open(filename) as tsv:
             pass
+
+    def calculate_tf_idf(cls):
+        """ All pseudo code, please change later """
+        N = InvertedIndex.docID
+        
+        for k in InvertedIndex.keys():
+            # Structure of Inv. Index: {Token: [frequency, [docID, pos1, pos2, ...], [docID2, pos1, pos2, ...], ...]}
+            tf_list = [] # TF listing for the current token
+            for t in InvertedIndex[k][1:]:
+                tf_list.append(len(t) - 1) # the TF of each term is the (len-1) from removing the first docID
+
+            df = int() # TODO
+            
+            idf[k] = (1 + log(tf)) * log(N / df)
