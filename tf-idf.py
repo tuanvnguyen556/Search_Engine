@@ -2,8 +2,9 @@ from inverted_index import InvertedIndex
 from math import log10
 class Calculatetfidf:
     """This function calaculates the term frequency and inverted document frequency for each term"""
-    idf = dict() #stores the idf of each term
-    #of the format: Token (key) : tf-idf (value)
+    tf_idf_map = dict() # Stores the tf-idf of each term
+
+    #of the format: {Token : [doc1: tf-idf, doc2: tf-idf} Token2: {}, ...}
 
     @classmethod
     def calculate_idf(cls, filename: str):
@@ -24,13 +25,22 @@ class Calculatetfidf:
     def calculate_tf_idf(cls):
         """ All pseudo code, please change later """
         N = InvertedIndex.docID
-        
+
         for k in InvertedIndex.keys():
             # Structure of Inv. Index: {Token: [frequency, [docID, pos1, pos2, ...], [docID2, pos1, pos2, ...], ...]}
-            tf_list = [] # TF listing for the current token
-            for t in InvertedIndex[k][1:]:
-                tf_list.append(len(t) - 1) # the TF of each term is the (len-1) from removing the first docID
 
-            df = int() # TODO
-            
-            idf[k] = (1 + log(tf)) * log(N / df)
+            idf = (N / (len(InvertedIndex[k][1:])) # IDF is Number of Docs / number of docs containing term
+
+            tf_idf_map[k] = dict() # Initialize into dict
+
+            for t in InvertedIndex[k][1:]:
+
+                cur_docID = t[0]
+
+                tf = len(t) - 1 # the TF of each term is the (len-1) from removing the first docID from [docID, pos1, pos2]
+                
+                tf_idf_map[k][cur_IDF] = (1 + log(tf)) * log(N / idf)
+
+
+
+
