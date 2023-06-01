@@ -5,6 +5,7 @@ from booleanRetrieval import booleanRetrieval
 from inverted_index import InvertedIndex
 from posting_dictionary import Posting_Dict
 from retrieve_from_tsv import getTSVList
+from tf_idf import Calculatetfidf
 import time
 
 def main() -> None:
@@ -13,6 +14,9 @@ def main() -> None:
     
     with open("posting.txt") as f2:
         Posting_Dict.ID_Posting = json.load(f2)
+
+    with open("idf_scores.json") as f3:
+        Calculatetfidf.idf_map = json.load(f3)
     
     with open("indexer.tsv", "r") as f:    
         file = csv.reader(f, delimiter='\t')
@@ -27,9 +31,11 @@ def main() -> None:
                 start = time.time()
                 queryList = query.split()
                 lstPos = []
-                for q in queryList:
-                    if q in positions_dict:
-                        lstPos.append(getTSVList(f, q, positions_dict[q]))
+                orderedQueryList = sorted([(term, Calculatetfidf.idf_map[term]) for term in queryList], key=lambda x: x[1], reverse=True)
+                for i in range(min(5, len(orderedQueryList))):
+                    word = orderedQueryList[i]
+                    if word in positions_dict:
+                        lstPos.append(getTSVList(f, orderedQueryList[i], positions_dict[word]))
                 
                 if not lstPos: # no query terms exist in the corpus
                     continue
