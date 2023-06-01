@@ -5,6 +5,7 @@ from booleanRetrieval import booleanRetrieval
 from inverted_index import InvertedIndex
 from posting_dictionary import Posting_Dict
 from retrieve_from_tsv import getTSVList
+import time
 
 def main() -> None:
     with open("indexer_positions.json") as f1:
@@ -15,6 +16,7 @@ def main() -> None:
     
     with open("indexer.tsv", "r") as f:    
         file = csv.reader(f, delimiter='\t')
+        boolRetrieve = booleanRetrieval()
         while True:
             query = input("Enter a query: ").lower()
             if not query:
@@ -22,6 +24,7 @@ def main() -> None:
             elif query == "quit the query":
                 break
             else:
+                start = time.time()
                 queryList = query.split()
                 lstPos = []
                 for q in queryList:
@@ -31,8 +34,9 @@ def main() -> None:
                 if not lstPos: # no query terms exist in the corpus
                     continue
                 else:
-                    print(lstPos)
-                    #retrieve_doc = booleanRetrieval(query)
+                    retrieve_doc = boolRetrieve.booleanAndRetrieval(query, *lstPos)
+                    end = time.time()
+                    print(end - start)
                     #save_docIDs = retrieve_doc.booleanAndRetrieval()
                     #retrieve_doc.print_urls(save_docIDs)
 
