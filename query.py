@@ -4,6 +4,7 @@ import csv
 from booleanRetrieval import booleanRetrieval
 from inverted_index import InvertedIndex
 from posting_dictionary import Posting_Dict
+from retrieve_from_tsv import getTSVList
 
 def main() -> None:
     with open("indexer_positions.json") as f1:
@@ -22,10 +23,18 @@ def main() -> None:
                 break
             else:
                 queryList = query.split()
-                tokenLsts = getTokenLst(file, *(positions_dict[term] for term in queryList if term in positions_dict))
-                retrieve_doc = booleanRetrieval(query)
-                save_docIDs = retrieve_doc.booleanAndRetrieval()
-                retrieve_doc.print_urls(save_docIDs)
+                lstPos = []
+                for q in queryList:
+                    if q in positions_dict:
+                        lstPos.append(getTSVList(f, q, positions_dict[q]))
+                
+                if not lstPos: # no query terms exist in the corpus
+                    continue
+                else:
+                    print(lstPos)
+                    #retrieve_doc = booleanRetrieval(query)
+                    #save_docIDs = retrieve_doc.booleanAndRetrieval()
+                    #retrieve_doc.print_urls(save_docIDs)
 
             
 
