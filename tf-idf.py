@@ -38,6 +38,15 @@ class Calculatetfidf:
 
             df = int() # TODO
     
+    @classmethod
+    def calculate_tf_idf(cls, tf: dict):
+        for docs, terms in tf.items():
+            count = 0
+            for pos in terms.values():
+                count += pos
+            cls.tf_idf_map[docs] = 1 + log10(count)
 
+        return cls.tf_idf_map
+    
 if __name__ == "__main__":
     pass

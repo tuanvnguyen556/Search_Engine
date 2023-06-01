@@ -42,5 +42,7 @@ class booleanRetrieval:
             
         # Return the final list of common documents
         return commonList
+    
+    
             
     

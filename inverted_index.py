@@ -69,7 +69,7 @@ class InvertedIndex:
             new_terms_dict = tsvfied(cls.InvertedIndexDict)
             with open("indexer_positions.json", "w") as f:
                 json.dump(new_terms_dict, f)
-                cls.terms_to_position[key] = [new_terms_dict[key]]
+                #cls.terms_to_position[key] = [new_terms_dict[key]]
         
         cls.InvertedIndexDict.clear()
 
