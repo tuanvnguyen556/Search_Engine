@@ -40,12 +40,13 @@ class Calculatetfidf:
     
     @classmethod
     def calculate_tf_idf(cls, tf: dict):
+        """This function calculates the tf-idf for every url"""
         for docs, terms in tf.items():
-            count = 0
-            for pos in terms.values():
-                count += pos
-            cls.tf_idf_map[docs] = 1 + log10(count)
-
+            store_tf_idf = []
+            for que, pos in terms.items(): #pos are the lengths of the list
+                store_tf_idf.append((1 + log10(pos)) * cls.idf_map[que])
+            cls.tf_idf_map[docs][que] = store_tf_idf #docs to their tf-idf scores
+            
         return cls.tf_idf_map
     
 if __name__ == "__main__":
