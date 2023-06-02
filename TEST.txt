@@ -22,5 +22,5 @@
 6. .txt - does not handle extensions
 7. http://archive.ics.uci.edu/ml/support/Iris - does not handle web links
 8. "sadness" - does not handle quotes
-9. 
-10. 
+9. computer science master engineering program education elective - only gave one url was able to handle long query but retrieved minimal urls
+10. the computer science 1 - longer queries take time to search but only included threshold for stopwords
