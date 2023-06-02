@@ -64,15 +64,13 @@ def main() -> None:
                     final_urls = sorted([(docs, tf_idf) for docs, tf_idf in \
                                   Calculatetfidf.calculate_tf_idf(dict_vals,orderedQueryList).items()], key=(lambda x: -x[1]))
                     
-                    for i in range(min(5, len(final_urls))):
+                    for i in range(len(final_urls)):
                         print(Posting_Dict.ID_Posting[str(final_urls[i][0])]['url'])
-                    
-                    end = time.time()
-                    print((end - start) * 1000, "ms")
-                    #print(dict_vals)
-    
-
-        # [[1, 2, 4, 8], [3, 5, 9], [10]]
+                        if i % 5 == 4:
+                            end = time.time()
+                            print((end - start) * 1000, "ms")
+                            if input('Enter "more" to see more queries (press any other key otherwise): ') != "more":
+                                break
             
 
 
