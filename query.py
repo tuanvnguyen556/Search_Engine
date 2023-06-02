@@ -65,9 +65,16 @@ def main() -> None:
                     final_urls = sorted([(docs, tf_idf) for docs, tf_idf in \
                                   Calculatetfidf.calculate_tf_idf(dict_vals,orderedQueryList).items() if docs in map_reconstruct], key=(lambda x: -x[1]))
                     
-                    for i in range(len(final_urls)):
-                        print(Posting_Dict.ID_Posting[str(final_urls[i][0])]['url'])
-                        if i % 5 == 4:
+                    i = 0
+                    count = 0
+                    while i < len(final_urls):
+                        if Posting_Dict.ID_Posting[str(final_urls[i][0])]['url']:
+                            print(Posting_Dict.ID_Posting[str(final_urls[i][0])]['url'])
+                            count += 1
+                            i += 1
+                        else:
+                            i += 1
+                        if count % 5 == 4:
                             end = time.time()
                             print((end - start) * 1000, "ms")
                             if input('Enter "more" to see more queries (press any other key otherwise): ') != "more":
