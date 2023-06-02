@@ -34,7 +34,7 @@ class Calculatetfidf:
         for k in InvertedIndex.keys():
             # Structure of Inv. Index: {Token: [frequency, [docID, pos1, pos2, ...], [docID2, pos1, pos2, ...], ...]}
 
-            idf = (N / (len(InvertedIndex[k][1:])) # IDF is Number of Docs / number of docs containing term
+            idf = N / (len(InvertedIndex[k][1:])) # IDF is Number of Docs / number of docs containing term
 
             #tf_idf_map[k] = dict() # Initialize into dict
 
