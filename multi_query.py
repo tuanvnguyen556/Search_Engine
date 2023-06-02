@@ -1,4 +1,4 @@
-def kevin_multi_query(sentence, tsv_file) -> dict:
+def kevin_multi_query(sentence, tsv_file, orderedList) -> dict:
     """
     Scuffed sentence finder with no efficiency. Linear search without accounting for weighting
 
@@ -6,7 +6,15 @@ def kevin_multi_query(sentence, tsv_file) -> dict:
     tsv_file: map of tokens to list of lists, discard frequiency since not needed
 
     """
-    
+    d = {sent:[] for sent in sentence}
+    for id in tsv_file:
+        for i in range(len(tsv_file[id])):
+            d[orderedList[i][0]].append(tsv_file[id][i])
+
+    tsv_file = d
+    print(tsv_file)
+    # {docID: [[], [], []]}
+    # {token: [[], [], []]}
     result = {} # return value of format {docID : times sentence appears}
 
     for doc in tsv_file[sentence[0]]:
@@ -18,7 +26,7 @@ def kevin_multi_query(sentence, tsv_file) -> dict:
         for next_word in sentence[1:]:
         # Attempt to build a complete sentence map
         
-            for d in tsv_file[sentence[next_word]]:
+            for d in tsv_file[next_word]:
                 # Find and add the [docID, pos, pos] with same docID as doc
                 if d[0] == doc[0]:
                     sentence_map.append(d[1:])
@@ -41,7 +49,7 @@ def kevin_multi_query(sentence, tsv_file) -> dict:
                     npos += 1
 
             if sentence_found:
-                if result[doc[0]] in result.keys():
+                if doc[0] in result.keys():
                     result[doc[0]] += 1
                 else:
                     result[doc[0]] = 1
