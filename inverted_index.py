@@ -128,3 +128,8 @@ def tsvfied(indexer: dict):
             tsv_writer.writerow([k, indexer[k][0], *indexer[k][1:]])
     
     return terms_dict
+
+def positions(pos : dict, qlist: list) -> bool:
+    """This function ensures that the the order of the query matches
+    a segment within a url"""
+    pass
