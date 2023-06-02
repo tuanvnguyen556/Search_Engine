@@ -32,5 +32,6 @@ def score_idfs():
             
 
 if __name__ == "__main__":
-    #running_indexer() #launches indexer
-    score_idfs()
+    running_indexer() #launches indexer
+    #score_idfs()
+    

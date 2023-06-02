@@ -69,7 +69,6 @@ class InvertedIndex:
             new_terms_dict = tsvfied(cls.InvertedIndexDict)
             with open("indexer_positions.json", "w") as f:
                 json.dump(new_terms_dict, f)
-                cls.terms_to_position[key] = [new_terms_dict[key]]
         
         cls.InvertedIndexDict.clear()
 
@@ -128,3 +127,8 @@ def tsvfied(indexer: dict):
             tsv_writer.writerow([k, indexer[k][0], *indexer[k][1:]])
     
     return terms_dict
+
+def positions(pos : dict, qlist: list) -> bool:
+    """This function ensures that the the order of the query matches
+    a segment within a url"""
+    pass
