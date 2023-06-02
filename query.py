@@ -53,6 +53,8 @@ def main() -> None:
                     word = orderedQueryList[i][0]
                     if word in positions_dict:
                         dict_vals, maxKey = getTSVList(f, orderedQueryList[i], positions_dict[word], dict_vals, maxKey)
+                    else:
+                        orderedQueryList.remove(word)
                 
                 if not dict_vals: # no query terms exist in the corpus
                     print("Query terms do not exist. Please try a different search.")

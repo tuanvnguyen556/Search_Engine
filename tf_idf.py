@@ -44,7 +44,7 @@ class Calculatetfidf:
         for docs, terms in tf.items(): # docs: docIDs, terms: [[], []]
             store_tf_idf = 0
             for i in range(len(orderedQueryList)): #pos are the lengths of the list
-                store_tf_idf += (1 + log10(len(terms[i]) - 1)) * cls.idf_map[orderedQueryList[i][0]]
+                    store_tf_idf += (1 + log10(len(terms[i]) - 1)) * cls.idf_map[orderedQueryList[i][0]]
             cls.tf_idf_map[docs] = store_tf_idf #docs to their tf-idf scores 
 
         return cls.tf_idf_map
