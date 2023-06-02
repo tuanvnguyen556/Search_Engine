@@ -41,9 +41,11 @@ def main() -> None:
 
                 orderedQueryList = sorted([(term, Calculatetfidf.idf_map[term]) for term in queryList if term in Calculatetfidf.idf_map], key=lambda x: x[1], reverse=True)
                 
-                #if num_stop / len(queryList) >= .75 and len(queryList) >= 2: #threshold for num of stop_words
-                    #orderedQueryList = orderedQueryList[:num_stop // 2]
-               
+                if num_stop / len(queryList) == 1.0 and len(queryList) >= 2: #threshold for num of stop_words
+                    orderedQueryList = orderedQueryList[:num_stop // 2]
+                elif num_stop / len(queryList) >= .4 and len(queryList) >= 2:
+                    orderedQueryList = orderedQueryList[:-num_stop]
+
                 dict_vals = {}
                 maxKey = 0 # first maxKey is not used, used for every term afterward
                 for i in range(len(orderedQueryList)):
