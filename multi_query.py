@@ -7,14 +7,14 @@ def kevin_multi_query(sentence, tsv_file, orderedList) -> dict:
 
     """
 
-    """
+
     d = {sent:[] for sent in sentence}
     for id in tsv_file:
         for i in range(len(tsv_file[id])):
             d[orderedList[i][0]].append(tsv_file[id][i])
     
     tsv_file = d
-    """
+
 
     # {docID: [[], [], []]}
     # {token: [[], [], []]}
