@@ -1,6 +1,53 @@
-Search_Engine
+Final Search_Engine
 
+~INDEXER~
 
+MAKE SURE TO RUN THESE PIP INSTALLS
+
+1. pip install beautifulsoup4
+2. pip install --user -U nltk
+3. pip install requests
+4. pip install flask
+
+BEFORE RUNNING YOUR INDEXER
+
+MAKE SURE TO REMOVE THESE FILES
+
+1. idf_scores.json
+2. indexer_positions.json
+3. indexer.tsv
+4. indexer_path_old.tsv
+5. posting.txt
+
+MAKE SURE TO GO INTO indexer.py
+TO CHANGE THE LOCATION OF THE developer directory
+
+line 16 should be:
+
+directories variable should be a string path to the developer folder
+
+Finally In order to run the indexer,
+you must open up your terminal and run this command
+
+python launch.py
+
+~USER INTERFACE~
+
+if you want a terminal interface
+
+Run this command:
+
+python query.py
+
+if you want a local web interface
+
+Run this command:
+
+python flask_app.py
+
+Info: running query.py and flask_app.py will take some time to load
+
+~Progress~
 INDEXER (Milestone 1):
 To Convert a text file into a pdf
 Use this command on the terminal

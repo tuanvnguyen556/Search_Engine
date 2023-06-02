@@ -58,7 +58,6 @@ def main() -> None:
                     continue
                 else:
                     # dict_vals : {1: [[positions], [positions], [positions]]}
-                    #retrieve_doc = boolRetrieve.booleanAndRetrieval(query, *lstPos)
                     #print(dict_vals.values())
                     #print(orderedQueryList)
                     final_urls = sorted([(docs, tf_idf) for docs, tf_idf in \
