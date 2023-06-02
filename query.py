@@ -7,6 +7,7 @@ from posting_dictionary import Posting_Dict
 from retrieve_from_tsv import getTSVList2 as getTSVList
 from tf_idf import Calculatetfidf
 import time
+from multi_query import kevin_multi_query
 
 def main() -> None:
     stop_words = ['of', 'and', 'the', 'to', 'a', 'in', 'for', 'is', 'on', 'at', 'with', 'this', 'by', 'that', 'or', 'from', 'are', 'be', 'as', 'an']
@@ -57,21 +58,20 @@ def main() -> None:
                     print("Query terms do not exist. Please try a different search.")
                     continue
                 else:
-                    # dict_vals : {1: [[positions], [positions], [positions]]}
-                    #print(dict_vals.values())
-                    #print(orderedQueryList)
+                    # if len(queryList) == len(orderedQueryList):
+                    #     map_reconstruct = kevin_multi_query(queryList, dict_vals, orderedQueryList)
+                    # else:
+                    #     map_reconstruct = dict_vals # just so conditional works
                     final_urls = sorted([(docs, tf_idf) for docs, tf_idf in \
-                                  Calculatetfidf.calculate_tf_idf(dict_vals,orderedQueryList).items()], key=(lambda x: -x[1]))
+                                  Calculatetfidf.calculate_tf_idf(dict_vals,orderedQueryList).items() if docs in map_reconstruct], key=(lambda x: -x[1]))
                     
-                    for i in range(min(5, len(final_urls))):
+                    for i in range(len(final_urls)):
                         print(Posting_Dict.ID_Posting[str(final_urls[i][0])]['url'])
-                    
-                    end = time.time()
-                    print((end - start) * 1000, "ms")
-                    #print(dict_vals)
-    
-
-        # [[1, 2, 4, 8], [3, 5, 9], [10]]
+                        if i % 5 == 4:
+                            end = time.time()
+                            print((end - start) * 1000, "ms")
+                            if input('Enter "more" to see more queries (press any other key otherwise): ') != "more":
+                                break
             
 
 
