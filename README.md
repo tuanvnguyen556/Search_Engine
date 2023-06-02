@@ -39,6 +39,11 @@ Run this command:
 
 python query.py
 
+To exit from the query terminal 
+enter this command:
+
+quit the query
+
 if you want a local web interface
 
 Run this command:
