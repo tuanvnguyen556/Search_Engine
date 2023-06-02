@@ -1,0 +1,26 @@
+~20 Sample Queries~
+
+~Strengths~
+1. cristina lopes (3.74 ms) - Names are unique and allow our search engine to not spend time on stop words.   
+2. pattis - (2.41 ms) single word query and a unique name.
+3. master master (11.1 ms) - accidental repeats are removed.
+4. of the computer (57.725) - reordered by idf values first to priortize less frequent tokens
+5. asdfdsafasdfasdfads - random text is ignored
+6. computer science of asdklfasdfdas (241.54 ms) - ignores bad query input and looks up other
+7. 911 (16.7 ms) - process numbers
+8. ACM (23.5 ms) - handles acroynyms
+9. COMPUTER SCIENCE (91.7 ms) - handles capitalization
+10. the pattis a (18.2 ms) - dealt with stopwords by using a threshold to recommend urls containing more unique token
+
+~Weakness~
+
+1. the (134.6 ms) - most frequent stopword with lowest idf and we utilized idfs to prioritize stop words last
+2. to be or not to be (78.5 ms) - query is not located in the same sequence within web text 
+3. UCIstudentsdorming - needs to be split to recieve webs of interest
+4. DON'T - did not process possesion from apostrophe
+5. @ - symbols are not processed as a query
+6. .txt - does not handle extensions
+7. http://archive.ics.uci.edu/ml/support/Iris - does not handle web links
+8. "sadness" - does not handle quotes
+9. 
+10. 
