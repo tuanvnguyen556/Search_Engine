@@ -42,10 +42,11 @@ class Calculatetfidf:
     def calculate_tf_idf(cls, tf: dict, orderedQueryList: list):
         """This function calculates the tf-idf for every query term"""
         for docs, terms in tf.items(): # docs: docIDs, terms: [[], []]
-          
             store_tf_idf = 0
-            for i in range(len(orderedQueryList)): #pos are the lengths of the list
+
+            for i in range(min(len(orderedQueryList), len(terms))): #pos are the lengths of the list
                 store_tf_idf += (1 + log10(len(terms[i]) - 1)) * cls.idf_map[orderedQueryList[i][0]]
+
             cls.tf_idf_map[docs] = store_tf_idf #docs to their tf-idf scores 
 
         return cls.tf_idf_map
