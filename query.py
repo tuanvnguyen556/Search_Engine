@@ -70,15 +70,16 @@ def main() -> None:
                     while i < len(final_urls):
                         if Posting_Dict.ID_Posting[str(final_urls[i][0])]['url']:
                             print(Posting_Dict.ID_Posting[str(final_urls[i][0])]['url'])
+                            if count % 5 == 4:
+                                end = time.time()
+                                print((end - start) * 1000, "ms")
+                                if input('Enter "more" to see more queries (press any other key otherwise): ') != "more":
+                                    break
                             count += 1
                             i += 1
                         else:
                             i += 1
-                        if count % 5 == 4:
-                            end = time.time()
-                            print((end - start) * 1000, "ms")
-                            if input('Enter "more" to see more queries (press any other key otherwise): ') != "more":
-                                break
+ 
             
 
 
