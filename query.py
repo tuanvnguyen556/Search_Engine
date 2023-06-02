@@ -21,7 +21,7 @@ def main() -> None:
     
     with open("indexer.tsv", "r") as f:    
         file = csv.reader(f, delimiter='\t')
-        boolRetrieve = booleanRetrieval()
+        #boolRetrieve = booleanRetrieval()
         while True:
             end1 = time.time()
             query = input("Enter a query: ").lower()
@@ -47,13 +47,16 @@ def main() -> None:
                 else:
                     # dict_vals : {1: [[positions], [positions], [positions]]}
                     #retrieve_doc = boolRetrieve.booleanAndRetrieval(query, *lstPos)
-                    Calculatetfidf.calculate_tf_idf()
+                    final_urls = sorted([(docs, tf_idf) for docs, tf_idf in \
+                                  Calculatetfidf.calculate_tf_idf(dict_vals,orderedQueryList).items()], key=(lambda x: -x[1]))
+                    
+                    for i in range(min(5, len(final_urls))):
+                        print(Posting_Dict.ID_Posting[str(final_urls[i][0])]['url'])
+                    
                     end = time.time()
-                    print(dict_vals)
                     print((end - start) * 1000, "ms")
                     #print(dict_vals)
-                    #save_docIDs = retrieve_doc.booleanAndRetrieval()
-                    #retrieve_doc.print_urls(save_docIDs)
+    
 
         # [[1, 2, 4, 8], [3, 5, 9], [10]]
             
