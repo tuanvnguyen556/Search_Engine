@@ -9,6 +9,7 @@ from tf_idf import Calculatetfidf
 import time
 
 def main() -> None:
+    stop_words = ['of', 'and', 'the', 'to', 'a', 'in', 'for', 'is', 'on', 'at', 'with', 'this', 'by', 'that', 'or', 'from', 'are', 'be', 'as', 'an']
     print("Query loading...")
     with open("indexer_positions.json") as f1:
         positions_dict = json.load(f1)
@@ -31,12 +32,21 @@ def main() -> None:
                 break
             else:
                 start = time.time()
-                queryList = query.split()
-                lstPos = []
+                queryList = list(set(query.split()))
+
+                num_stop = 0 #counts how many stop_words are in query
+                for i in queryList:
+                    if i in stop_words:
+                        num_stop += 1 #adds 1 to stop word counter
+
                 orderedQueryList = sorted([(term, Calculatetfidf.idf_map[term]) for term in queryList if term in Calculatetfidf.idf_map], key=lambda x: x[1], reverse=True)
+                
+                #if num_stop / len(queryList) >= .75 and len(queryList) >= 2: #threshold for num of stop_words
+                    #orderedQueryList = orderedQueryList[:num_stop // 2]
+               
                 dict_vals = {}
                 maxKey = 0 # first maxKey is not used, used for every term afterward
-                for i in range(min(5, len(orderedQueryList))):
+                for i in range(len(orderedQueryList)):
                     word = orderedQueryList[i][0]
                     if word in positions_dict:
                         dict_vals, maxKey = getTSVList(f, orderedQueryList[i], positions_dict[word], dict_vals, maxKey)
@@ -47,6 +57,8 @@ def main() -> None:
                 else:
                     # dict_vals : {1: [[positions], [positions], [positions]]}
                     #retrieve_doc = boolRetrieve.booleanAndRetrieval(query, *lstPos)
+                    #print(dict_vals.values())
+                    #print(orderedQueryList)
                     final_urls = sorted([(docs, tf_idf) for docs, tf_idf in \
                                   Calculatetfidf.calculate_tf_idf(dict_vals,orderedQueryList).items()], key=(lambda x: -x[1]))
                     
