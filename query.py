@@ -40,11 +40,6 @@ def main() -> None:
                     word = orderedQueryList[i][0]
                     if word in positions_dict:
                         dict_vals, maxKey = getTSVList(f, orderedQueryList[i], positions_dict[word], dict_vals, maxKey)
-                    """
-                    word = orderedQueryList[i][0]
-                    if word in positions_dict:
-                        lstPos.append(getTSVList(f, orderedQueryList[i], positions_dict[word]))
-                    """
                 
                 if not dict_vals: # no query terms exist in the corpus
                     print("Query terms do not exist. Please try a different search.")
@@ -52,7 +47,9 @@ def main() -> None:
                 else:
                     # dict_vals : {1: [[positions], [positions], [positions]]}
                     #retrieve_doc = boolRetrieve.booleanAndRetrieval(query, *lstPos)
+                    Calculatetfidf.calculate_tf_idf()
                     end = time.time()
+                    print(dict_vals)
                     print((end - start) * 1000, "ms")
                     #print(dict_vals)
                     #save_docIDs = retrieve_doc.booleanAndRetrieval()

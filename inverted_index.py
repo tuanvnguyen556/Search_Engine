@@ -47,7 +47,7 @@ class InvertedIndex:
                 token_frequency[token] += 1
             positionCounter += 1
 
-        if sys.getsizeof(cls.InvertedIndexDict) > 10: # > 100 MB for testing
+        if sys.getsizeof(cls.InvertedIndexDict) > 100000000: # > 100 MB for testing
             cls.write_to_file()
             
         # Increment the overall docID

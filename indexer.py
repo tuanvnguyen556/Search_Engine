@@ -13,7 +13,7 @@ def index():
     '''
     nltk.download('punkt') #downloads version to tokenize
     # USER SHOULD CHANGE THIS DIRECTORY TO MATCH THEIR LOCAL DIRECTORY
-    directories = "C://developer" 
+    directories = "developer" 
 
     read_files(directories) #uses recursion to read the files
 

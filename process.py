@@ -20,7 +20,10 @@ def file_processor(given_file):
         create_request = requests.get(data['url'])
         if 200 <= create_request.status_code < 400:
             fragmenter = Remove_fragments()
-            if not fragmenter.remove_fragment(data['url']):
+            fragment_url = fragmenter.remove_fragment(data['url'])
+            if data and 'url' in data:
+                data['url'] = fragment_url
+            if not fragment_url:
                 return tokens, data #returns data == None and token == []
             soup = BeautifulSoup(create_request.text, 'html.parser') #parses html
             text = soup.get_text(strip=True) #retrieves the content
@@ -29,7 +32,7 @@ def file_processor(given_file):
     except Exception as e:
         pass #ignore the error
     open_file.close()
-
+    print(data['url'])
     return tokens, data #data is used for truthy boolean comparison to see if a json object was returned
     #data == None, then can't process the file
     #data == json object, then file was processed 

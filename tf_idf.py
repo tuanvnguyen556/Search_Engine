@@ -39,13 +39,13 @@ class Calculatetfidf:
             df = int() # TODO
     
     @classmethod
-    def calculate_tf_idf(cls, tf: dict):
+    def calculate_tf_idf(cls, tf: dict, orderedQueryList: list):
         """This function calculates the tf-idf for every query term"""
-        for docs, terms in tf.items():
-            store_tf_idf = []
-            for que, pos in terms.items(): #pos are the lengths of the list
-                store_tf_idf.append((1 + log10(pos)) * cls.idf_map[que])
-            cls.tf_idf_map[docs][que] = store_tf_idf #docs to their tf-idf scores
+        for docs, terms in tf.items(): # docs: docIDs, terms: [[], []]
+            store_tf_idf = 0
+            for i in range(len(terms)): #pos are the lengths of the list
+                store_tf_idf += (1 + log10(len(terms[i]) - 1)) * cls.idf_map[orderedQueryList[i]]
+            cls.tf_idf_map[docs] = store_tf_idf #docs to their tf-idf scores 
 
         return cls.tf_idf_map
     
