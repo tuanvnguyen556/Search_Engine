@@ -25,9 +25,6 @@ def kevin_multi_query(sentence, tsv_file, orderedList) -> dict:
         # Loop through all [docID, pos, pos, pos] containing the first word
         # TODO: use continue if docID does not contain all words
 
-        if testing_times <= 0:
-            break
-
         sentence_map = [doc[1:]] # List of lists
 
         for next_word in sentence[1:]:
