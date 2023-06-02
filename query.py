@@ -63,7 +63,7 @@ def main() -> None:
                     # else:
                     #     map_reconstruct = dict_vals # just so conditional works
                     final_urls = sorted([(docs, tf_idf) for docs, tf_idf in \
-                                  Calculatetfidf.calculate_tf_idf(dict_vals,orderedQueryList).items() if docs in map_reconstruct], key=(lambda x: -x[1]))
+                                  Calculatetfidf.calculate_tf_idf(dict_vals,orderedQueryList).items()], key=(lambda x: -x[1]))
                     
                     for i in range(len(final_urls)):
                         print(Posting_Dict.ID_Posting[str(final_urls[i][0])]['url'])
