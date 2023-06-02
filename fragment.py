@@ -9,7 +9,12 @@ class Remove_fragments:
 
     @classmethod #decorator to save the state of the class until the program ends
     def remove_fragment(cls, given_url: str) -> str:
-        unique_url = given_url[:given_url.find('#')] #strips the fragment from the url
+        unique_url = ""
+        for ch in given_url: #strips the fragment from the url
+            if ch == "#":
+                break
+            else:
+                unique_url += ch
         if unique_url not in cls.unique_urls:
             cls.unique_urls.add(unique_url) #stores the unique url so that it has been counted
             return unique_url  
