@@ -12,14 +12,19 @@ def kevin_multi_query(sentence, tsv_file, orderedList) -> dict:
             d[orderedList[i][0]].append(tsv_file[id][i])
 
     tsv_file = d
-    print(tsv_file)
+
     # {docID: [[], [], []]}
     # {token: [[], [], []]}
     result = {} # return value of format {docID : times sentence appears}
 
+    testing_times = 5
+
     for doc in tsv_file[sentence[0]]:
         # Loop through all [docID, pos, pos, pos] containing the first word
         # TODO: use continue if docID does not contain all words
+
+        if testing_times <= 0:
+            break
 
         sentence_map = [doc[1:]] # List of lists
 
@@ -34,9 +39,15 @@ def kevin_multi_query(sentence, tsv_file, orderedList) -> dict:
         if len(sentence_map) < len(sentence):
             # Skip if entire query does not appear in the current docID
             continue
+        else: 
+            i = 0
+            for k in tsv_file.keys():
+                print(k, ":", sentence_map[i])
+                i += 1
         
-        sentence_counter = 0
+        testing_times -= 1
 
+        """
         for p in sentence_map[0]:
             # Iterate through first word's [pos1, pos2, pos3] and look for consecutive pos in the other docIDs
             sentence_found = True
@@ -53,5 +64,6 @@ def kevin_multi_query(sentence, tsv_file, orderedList) -> dict:
                     result[doc[0]] += 1
                 else:
                     result[doc[0]] = 1
+        """
 
     return result
