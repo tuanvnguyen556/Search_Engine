@@ -1,6 +1,6 @@
 Final Search_Engine
 
-~INDEXER~
+[INDEXER]
 RUNNING THE CODE THAT CREATES THE INDEX
 MAKE SURE TO RUN THESE PIP INSTALLS
 
@@ -34,7 +34,7 @@ you must open up your terminal and run this command
 
 python launch.py
 
-~USER INTERFACE~
+[USER INTERFACE]
 THIS WILL START THE SEARCH ENGINGE
 if you want a terminal interface
 
@@ -66,7 +66,7 @@ Feel free to navigate to them by clicking on the link
 
 Info: running query.py and flask_app.py will take some time to load
 
-~Progress~
+[Progress]
 INDEXER (Milestone 1):
 To Convert a text file into a pdf
 Use this command on the terminal
