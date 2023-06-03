@@ -1,8 +1,6 @@
 """ Run this file and enter a query from the terminal. """
 import json
 import csv
-from booleanRetrieval import booleanRetrieval
-from inverted_index import InvertedIndex
 from posting_dictionary import Posting_Dict
 from retrieve_from_tsv import getTSVList2 as getTSVList
 from tf_idf import Calculatetfidf
@@ -39,7 +37,7 @@ def main() -> None:
             elif query == "quit the query":
                 break
             else:
-                start = time.time()
+                
                 queryList = list(set(query.split()))
                 
                 # Keep track of the total number of stop words
@@ -89,8 +87,7 @@ def main() -> None:
                             # Check for first 5 urls
                             if count % 5 == 4:
                                 # After processing the first 5 urls, indicate the time taken as well as print it out 
-                                end = time.time()
-                                print((end - start) * 1000, "ms")
+                                
                                 if input('Enter "more" to see more queries (press any other key otherwise): ') != "more":
                                     break
                             count += 1

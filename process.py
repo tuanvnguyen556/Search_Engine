@@ -21,11 +21,10 @@ def file_processor(given_file):
         if 200 <= create_request.status_code < 400:
             fragmenter = Remove_fragments()
             fragment_url = fragmenter.remove_fragment(data['url'])
-            if data and 'url' in data:
-                data['url'] = fragment_url
             if not fragment_url:
                 return tokens, data #returns data == None and token == []
-            
+            if data and 'url' in data:
+                data['url'] = fragment_url
             soup = BeautifulSoup(create_request.text, 'html.parser') #parses html
             text = soup.get_text(strip=True) #retrieves the content
             textWithoutSymbols = re.sub(r"[^A-Za-z0-9\s]+", "", text) #does some stripping of characters

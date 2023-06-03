@@ -5,15 +5,15 @@
             Search Engine
         </title>
         <h1>
-            Welcome!
+            Zotoogle!
         </h1>
-        <link rel='stylesheet' href="{{ url_for('static', filename='main.css') }}">
+        
     </head>
     
     <body>
         <div>
             <form method="post">
-                <input type="text", name="query">
+                <input type="text", name="query", placeholder="Enter your query...">
                 <input type ="submit", value="Submit", >
             </form>
         
@@ -24,7 +24,12 @@
             </h2>
             <h4>
                 <ol>
-                    <li>{{the_query}} </li>
+                    
+                    <li><a href={{q1}}> {{q1}} </a> </li>
+                    <li><a href={{q2}}> {{q2}} </a> </li>
+                    <li><a href={{q3}}> {{q3}} </a> </li>
+                    <li><a href={{q4}}> {{q4}} </a> </li>
+                    <li><a href={{q5}}> {{q5}} </a> </li>
 
                 </ol>
                 
