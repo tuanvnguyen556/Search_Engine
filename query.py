@@ -64,10 +64,13 @@ def main() -> None:
                     if word in positions_dict:
                         dict_vals, maxKey = getTSVList(f, orderedQueryList[i], positions_dict[word], dict_vals, maxKey)
                     else:
-                        orderedQueryList.remove(word)
-                        
+                        dict_vals = {} # term in query does not exist in any documents
+                        break
+                    if not dict_vals: # no documents in boolean AND, should break out of loop and return that no docs exist
+                        break
+                                        
                 if not dict_vals: # no query terms exist in the corpus
-                    print("Query terms do not exist. Please try a different search.")
+                    print("This set of terms do not exist together. Please try a different search.")
                     continue
                 else:
                     # if len(queryList) == len(orderedQueryList):
