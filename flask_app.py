@@ -45,7 +45,7 @@ def home():
         else:
             final_urls = sorted([(docs, tf_idf) for docs, tf_idf in \
                                   Calculatetfidf.calculate_tf_idf(dict_vals,orderedQueryList).items()], key=(lambda x: -x[1]))  
-            while len(final_urls) <=4 :
+            while len(final_urls) <= 5 :
                 final_urls.append("N/A")
             return render_template("redirect_index.html", the_query=given_query,
                             q1=Posting_Dict.ID_Posting[str(final_urls[0][0])]['url'],

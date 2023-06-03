@@ -1,17 +1,18 @@
 Final Search_Engine
 
 ~INDEXER~
-
+RUNNING THE CODE THAT CREATES THE INDEX
 MAKE SURE TO RUN THESE PIP INSTALLS
 
 1. pip install beautifulsoup4
 2. pip install --user -U nltk
 3. pip install requests
 4. pip install flask
+5. pip install Jinja2
 
 BEFORE RUNNING YOUR INDEXER
 
-MAKE SURE TO REMOVE THESE FILES
+MAKE SURE TO REMOVE THESE FILES IF IT EXISTS CURRENTLY
 
 1. idf_scores.json
 2. indexer_positions.json
@@ -19,27 +20,32 @@ MAKE SURE TO REMOVE THESE FILES
 4. indexer_path_old.tsv
 5. posting.txt
 
+The indexer will create the files above and the indexer will only create them
+if they do not exist within the folder 
 MAKE SURE TO GO INTO indexer.py
 TO CHANGE THE LOCATION OF THE developer directory
 
-line 16 should be:
+line 16 should be changed so that the
+directories variable is a string path to the developer folder
 
-directories variable should be a string path to the developer folder
-
-Finally In order to run the indexer,
+Finally, in order to run the indexer,
 you must open up your terminal and run this command
 
 python launch.py
 
 ~USER INTERFACE~
-
+THIS WILL START THE SEARCH ENGINGE
 if you want a terminal interface
 
 Run this command:
 
 python query.py
 
+Please wait momentarily until the terminal requests for an input
+You can simply enter your query right after
+
 To exit from the query terminal 
+
 enter this command:
 
 quit the query
@@ -49,6 +55,12 @@ if you want a local web interface
 Run this command:
 
 python flask_app.py
+Please take a moment until the terminal provides you the local hosting site
+
+Enter your query in to the search bar
+Press Enter
+You will be provided with 5 popular web links
+Feel free to navigate to them by clicking on the link
 
 Info: running query.py and flask_app.py will take some time to load
 
