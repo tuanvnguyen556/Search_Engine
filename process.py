@@ -18,13 +18,14 @@ def file_processor(given_file):
     try:
         data = json.load(open_file) #loads the json format
         create_request = requests.get(data['url'])
-        if 200 <= create_request.status_code < 400:
+        if 200 <= create_request.status_code < 400: #makes sure status code is within range
             fragmenter = Remove_fragments()
             fragment_url = fragmenter.remove_fragment(data['url'])
+            if data and 'url' in data:
+                data['url'] = fragment_url #changes the url to become the fragment_url
             if not fragment_url:
                 return tokens, data #returns data == None and token == []
-            if data and 'url' in data:
-                data['url'] = fragment_url
+            
             soup = BeautifulSoup(create_request.text, 'html.parser') #parses html
             text = soup.get_text(strip=True) #retrieves the content
             textWithoutSymbols = re.sub(r"[^A-Za-z0-9\s]+", "", text) #does some stripping of characters

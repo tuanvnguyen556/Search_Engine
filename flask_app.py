@@ -16,6 +16,9 @@ def home():
         stop_words = ['of', 'and', 'the', 'to', 'a', 'in', 'for', 'is', 'on', 'at', 'with', 'this', 'by', 'that', 'or', 'from', 'are', 'be', 'as', 'an']
         given_query = request.form["query"]
         queryList = list(set(given_query.split()))
+        if len(queryList) == 0:
+            return render_template("redirect_index.html", the_query=given_query,
+                                   q1="N/a", q2="N/a", q3="N/a", q4="N/a", q5="N/a")
         # Keep track of the total number of stop words
         num_stop = 0 #counts how many stop_words are in query
         for i in queryList:

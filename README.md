@@ -19,6 +19,7 @@ MAKE SURE TO REMOVE THESE FILES IF IT EXISTS CURRENTLY
 3. indexer.tsv
 4. indexer_path_old.tsv
 5. posting.txt
+6. pip install aspose-words
 
 The indexer will create the files above and the indexer will only create them
 if they do not exist within the folder 
@@ -45,8 +46,9 @@ Please wait momentarily until the terminal requests for an input
 You can simply enter your query right after
 
 To exit from the query terminal 
+Enter any key so you are asked to enter a query afterwards
 
-enter this command:
+then enter this command:
 
 quit the query
 
